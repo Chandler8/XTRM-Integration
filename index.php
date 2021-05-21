@@ -11,6 +11,6 @@
 
     <h2> Chandler Writing </h2>
 
-    <h2>Chandler remote</h2>
+    <h2>Andre remote</h2>
 </body>
 </html>
