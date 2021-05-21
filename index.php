@@ -9,12 +9,11 @@
 <body>
     <h1>XTRM Testing Begins!</h1>
 
-    <h2> Chandler Writing </h2>
+    <h2> Chandler Writing Again </h2>
 
     <h2>Chandler remote</h2>
 
-    <h2>Chandler remote again</h2>
-
+    <h2>Andre remote</h2>
 
 </body>
 </html>
