@@ -13,9 +13,7 @@
 
     <h2>Chandler remote</h2>
 
-
-
-
     <h2>Andre remote</h2>
+
 </body>
 </html>
