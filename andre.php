@@ -4,14 +4,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Testing XTRM API</title>
+        <title>Andre's page for working on XTRM API</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="styles/mystyle.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
     </head>
     <body>
         <div class="container">
-            <h1>XTRM Testing Begins!</h1>
+            <h1>XTRM Testing of </h1>
             <p>Click this <a href="https://www.xtrm.com/web/Register/SponSimpleSignup.aspx" target="_blank">link</a> to begin your XTRM setup.</p>
         </div>
     </body>
