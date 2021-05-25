@@ -5,6 +5,13 @@
      * 
      * Scripts for testing XTRM API Calls.
      */
+
+     $name = htmlspecialchars($_POST['username']);
+     $email = htmlspecialchars($_POST['useremail']);
+     $pass = htmlspecialchars($_POST['useremail']); 
+
+     echo $name."<br>".$email."<br>".$pass;
+
 /*
     function getAuthToken()
     {
@@ -52,4 +59,3 @@
     getAuthToken();
     */
 
-    

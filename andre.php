@@ -13,27 +13,32 @@
         <div class="container-fluid">
             <div class="jumbotron">
                 <h1>XTRM Testing of form submissions</h1>
-                <p>Click this <a href="https://www.xtrm.com/web/Register/SponSimpleSignup.aspx" target="_blank">link</a> to begin your XTRM setup.</p>
+                <div class="nav flex-column">
+                    <p class="nav-link">Click this <a href="https://www.xtrm.com/web/Register/SponSimpleSignup.aspx" target="_blank">link</a> to begin your XTRM setup.</p>
+                    <p class="nav-link">To visit talent bills, click this link: <a href="chandler.php" target="_blank">Talent Bills</a></p>
+                </div>
             </div>
             <hr>
             <div class="container">
                 <form action="scripts/XTRM.php" method="POST">
                     <div class="form-group">
                         <label for="username">Name</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter your name">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your name">
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        <input type="email" class="form-control" id="email" name="useremail" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="pass">Password</label>
+                        <input type="password" class="form-control" id="pass" name="userpass" placeholder="Password">
                     </div>
-                    <div class="form-group form-check">
+
+                    <!--<div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
+                    </div>-->
+                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
