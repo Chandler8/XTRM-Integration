@@ -11,6 +11,53 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
 </head>
 
+<header>
+    <nav class="navbar navbar-expand">
+        <div class="container-fluid pl-0">
+
+            <ul class="navbar navbar-nav mr-auto" id="mainTopNavbar">
+                <li class="nav-item">
+                    <a class=" nav-link  " href="https://demo.v2.senegalsoftware.com/MARKETING/dashboard">
+                        MARKETING
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link  " href="https://demo.v2.senegalsoftware.com/CRM/dashboard">
+                        CRM
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link  " href="https://demo.v2.senegalsoftware.com/PROJECTS/dashboard">
+                        PROJECTS
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link  " href="https://demo.v2.senegalsoftware.com/HIRE/dashboard">
+                        HIRE
+                    </a>
+                </li>
+
+                <a class=" nav-link  " href="https://demo.v2.senegalsoftware.com/WORK/dashboard">
+                    WORK
+                </a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link  " href="https://demo.v2.senegalsoftware.com/LOGISTICS/dashboard">
+                        LOGISTICS
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link  active" href="https://demo.v2.senegalsoftware.com/FINANCE/dashboard">
+                        FINANCE
+                    </a>
+                </li>
+            </ul>
+            </li>
+
+        </div>
+    </nav>
+</header>
+
 <section>
     <div class="main_tabs">
         <div class="container-fluid">
@@ -53,8 +100,6 @@
                     <span class="form-control advanced_filter mr-3 cursor_pointer min_w_auto text-nowrap" data-target="advanced_search_TalentBill_searchpage"><i class="fal fa-sliders-h mr-2"></i> Filters</span>
                     <span id="view_actionscontainer_TalentBill_searchpage"></span>
 
-
-
                 </div>
                 <div class="d-flex align-items-center">
 
@@ -90,7 +135,7 @@
                     </div>
 
                     <div id="paginationcontainer_TalentBill_searchpage">
-                        <div class="pagination form-control mr-3">
+                        <div class="pagination form-control mr-6">
                             <ul class="d-flex">
 
                                 <li>
@@ -103,7 +148,6 @@
 
                 </div>
             </div>
-
 
             <div class="listing_view d-flex">
                 <div class="advanced_search bg_gray" id="advanced_search_TalentBill_searchpage">
@@ -253,8 +297,6 @@
         <h1>XTRM Testing of UI and white labeling!</h1>
         <p>Click here on this<a href="https://www.xtrm.com/web/Register/SponSimpleSignup.aspx" target="_blank"> link</a> to begin your XTRM setup.</p>
     </div>
-
-
 
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
