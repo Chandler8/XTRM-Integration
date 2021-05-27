@@ -15,12 +15,12 @@
 
      function getAuthToken()
     {
-      $credentials = ['grant_type' => 'password','client_id' => '1930815_API_User', 'client_secret' => "TrXSmMCkrGTq2UVsOYMloiPmpwdvIkVrE56DJAkOBkg="];
+      //$credentials = ['grant_type' => 'password','client_id' => '1930815_API_User', 'client_secret' => "TrXSmMCkrGTq2UVsOYMloiPmpwdvIkVrE56DJAkOBkg="];
     
       $curl = curl_init();
     
-      $jsonThing = json_encode($credentials);
-
+      //$jsonThing = json_encode($credentials);
+/*
       curl_setopt_array($curl, array(
         CURLOPT_URL => "http://xapisandbox.xtrm.com/oAuth/token",
         CURLOPT_RETURNTRANSFER => true,
@@ -31,7 +31,18 @@
         CURLOPT_FOLLOWLOCATION => false,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => $jsonThing,
+        CURLOPT_POSTFIELDS => $jsonThing,*/
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://xapisandbox.xtrm.com/oAuth/token',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => 'grant_type=password&client_id=1930815_API_User&client_secret=TrXSmMCkrGTq2UVsOYMloiPmpwdvIkVrE56DJAkOBkg=',
         CURLOPT_HTTPHEADER => array(
             "Content-Type: application/x-www-form-urlencoded"
         ),
