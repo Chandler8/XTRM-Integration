@@ -5,22 +5,22 @@
      * 
      * Scripts for testing XTRM API Calls.
      */
-
+/*
      $name = filter_input(INPUT_POST,'username');
      $email = filter_input(INPUT_POST,'useremail');
      $pass = filter_input(INPUT_POST,'userpass'); 
 
-     echo $name."<br>".$email."<br>".$pass;
+     echo $name."<br>".$email."<br>".$pass."<br><br>";
+*/
 
-/*
-    function getAuthToken()
+     function getAuthToken()
     {
       $credentials = ['grant_type' => 'password','client_id' => '1930815_API_User', 'client_secret' => "TrXSmMCkrGTq2UVsOYMloiPmpwdvIkVrE56DJAkOBkg="];
     
       $curl = curl_init();
     
       $jsonThing = json_encode($credentials);
-    
+
       curl_setopt_array($curl, array(
         CURLOPT_URL => "http://xapisandbox.xtrm.com/oAuth/token",
         CURLOPT_RETURNTRANSFER => true,
@@ -52,9 +52,9 @@
     }
 
     getAuthToken();
-    */
+    
 
-
+/*
     $curl = curl_init();
     
     curl_setopt_array($curl, [
@@ -93,3 +93,4 @@
             }
         }
     }
+    */
