@@ -80,3 +80,7 @@ select {
 .container {
     font-family: 'Crimson Pro', serif;
 }
+
+h1 {
+    color: blueviolet;
+}
