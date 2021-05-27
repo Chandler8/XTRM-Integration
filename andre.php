@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="jumbotron">
+            <div class="jumbotron" id="jumbo">
                 <h1>XTRM Testing of form submissions</h1>
                 <div class="nav flex-column">
                     <p class="nav-link">Click this <a href="https://www.xtrm.com/web/Register/SponSimpleSignup.aspx" target="_blank">link</a> to begin your XTRM setup.</p>
