@@ -23,7 +23,15 @@
                 <form action="scripts/XTRM.php" method="POST">
                     <div class="form-group">
                         <label for="username">Name</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your name">
+                        <input type="text" class="form-control" id="username" name="user_name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="user_email" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="u_id">User ID</label>
+                        <input type="text" class="form-control" id="u_id" name="user_id" placeholder="Enter your User ID">
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
