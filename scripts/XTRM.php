@@ -11,7 +11,8 @@
     $refresh_str = 'grant_type=password&client_id=1930815_API_User&client_secret=TrXSmMCkrGTq2UVsOYMloiPmpwdvIkVrE56DJAkOBkg=&refresh_token=ad7e1b4cfe904d88abbcc2fe70828fb9';
     $endpoint = "https://xapisandbox.xtrm.com";
     $I_A_N = "SPN19135579";
-    $access_account_number = "";
+    $A_A_N = "";
+    $R_A_N = "";
 
     $user_name = filter_input(INPUT_POST,'user_name');
     $user_email = filter_input(INPUT_POST,'user_email');
@@ -40,7 +41,7 @@
                 "Content-Type: application/x-www-form-urlencoded"
             ),
         ));
-    //***********************
+
         $response = curl_exec($curl);
         $err = curl_error($curl);
 
@@ -110,7 +111,7 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
-        global $access_account_number;
+        global $A_A_N;
         global $endpoint;
 
         $company_wallet_name = filter_input(INPUT_POST,'company_wallet_name');
@@ -126,7 +127,7 @@
                     "WalletName"=>$company_wallet_name,
                     "WalletCurrency"=>$company_wallet_currency,
                     "WalletType"=>$company_wallet_type,
-                    "AllowAccessAccountNumber"=>$access_account_number
+                    "AllowAccessAccountNumber"=>$A_A_N
                 ]
             ]
         ];
@@ -230,6 +231,71 @@
                                 echo "<br>";
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to update an ultimate remitter wallet
+    function upateCompanyWallet()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+
+        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        $company_wallet_name = filter_input(INPUT_POST,'company_wallet_name');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "UpdateCompanyWallet"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "WalletID"=>$company_wallet_id,
+                    "WalletName"=>$company_wallet_name
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/UpdateCompanyWallet',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            //print_r($resp);
+            
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $wallet=>$part){
+                        echo $wallet." = ".$part."<br>";
                     }
                 }
             }
@@ -659,4 +725,205 @@
 
 
 
-    getUserPaymentMethods();
+    //Use this function to retrieve company wallet transactions
+    function getCompanyWalletTransactions()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+
+        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetCompanyWalletTransactions"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "WalletID"=>$company_wallet_id,
+                    "Pagination"=>[
+                        "RecordsToSkip"=>"1",
+                        "RecordsToTake"=>"10"
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetCompanyWalletTransactions',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            //print_r($resp);
+            
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $transaction=>$part){
+                        echo $transaction." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve details of a company wallet transaction
+    function getCompanyWalletTransactionDetails()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+
+        $company_wallet_transaction_id = filter_input(INPUT_POST,'company_wallet_id');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetCompanyWalletTransactionDetails"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "TransactionID"=>$company_wallet_transaction_id
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetCompanyWalletTransactionDetails',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            //print_r($resp);
+            
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $fields=>$field){
+                        echo $fields." = ".$field."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve details of a user's wallet transactions by a specific remitter
+    function getUserWalletTransactionsByRemitter()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $u_id;
+        global $R_A_N;
+        global $endpoint;
+        
+        $user_wallet_currency = filter_input(INPUT_POST,'user_wallet_currency');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetUserWalletTransactionsByRemitter"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>"SPN17126699",
+                    "UserID"=>"PAT18128745",
+                    "RemitterAccountNo"=>"SPN17126699",
+                    "WalletCurrency"=>"USD",
+                    "Pagination"=>[
+                        "RecordsToSkip"=>"1",
+                        "RecordsToTake"=>"10"
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactionsByRemitter',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            //print_r($resp);
+            
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $transaction=>$part){
+                        echo $transaction." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    getCompanyWalletTransactionDetails();
