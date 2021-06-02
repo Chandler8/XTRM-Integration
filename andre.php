@@ -21,25 +21,52 @@
             <hr>
             <div class="container">
                 <form action="scripts/XTRM.php" method="POST">
-                    <div class="form-group">
-                        <label for="username">Name</label>
-                        <input type="text" class="form-control" id="username" name="user_name" placeholder="Enter your name">
+                    <div class="form-group user-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control" id="fname" name="first_name" placeholder="Enter your first name">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group user-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="form-control" id="lname" name="last_name" placeholder="Enter your last name">
+                    </div>
+                    <div class="form-group user-group find-user">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" name="user_email" placeholder="Enter email">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group form-check user-group">
+                        <input type="checkbox" class="form-check-input" id="notify">
+                        <label class="form-check-label" for="notify">Check to be notified by email</label>
+                    </div>
+                    <div class="form-group user-group">
+                        <label for="m_num">Mobile Number</label>
+                        <input type="text" class="form-control" id="m_num" name="mobile_number" placeholder="Enter your mobile number">
+                    </div>
+                    <div class="form-group user-group">
+                        <label for="tax">Tax ID</label>
+                        <input type="text" class="form-control" id="tax" name="tax_ID" placeholder="Enter tax id">
+                    </div>
+                    <div class="form-group user-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" name="user_dob" placeholder="Now">
+                    </div>
+                    <div class="form-group user-group">
+                        <label for="address1">Address</label>
+                        <input type="text" class="form-control" id="address1" name="address1" placeholder="Enter street address">
+                        <label for="address2">Apt/Suite</label>
+                        <input type="text" class="form-control" id="address2" name="address2" placeholder="Enter apt or suite">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter city">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" id="state" name="state" placeholder="Enter state">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" id="country" name="country" placeholder="Enter country">
+                        <label for="postal">Postal Code</label>
+                        <input type="text" class="form-control" id="postal" name="postal" placeholder="Enter postal/zip code">
+                    </div>
+
+                    <div class="form-group user-group find-user">
                         <label for="u_id">User ID</label>
                         <input type="text" class="form-control" id="u_id" name="user_id" placeholder="Enter your User ID">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="useremail" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="pass">Password</label>
-                        <input type="password" class="form-control" id="pass" name="userpass" placeholder="Password">
                     </div>
 
                     <!--<div class="form-group form-check">

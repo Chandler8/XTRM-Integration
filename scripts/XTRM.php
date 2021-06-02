@@ -872,9 +872,9 @@
         $request_fields = [
             "GetUserWalletTransactionsByRemitter"=>[
                 "Request"=>[
-                    "IssuerAccountNumber"=>"SPN17126699",
-                    "UserID"=>"PAT18128745",
-                    "RemitterAccountNo"=>"SPN17126699",
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "UserID"=>$u_id,
+                    "RemitterAccountNo"=>$R_A_N,
                     "WalletCurrency"=>"USD",
                     "Pagination"=>[
                         "RecordsToSkip"=>"1",
@@ -926,4 +926,4 @@
     
     
     
-    getCompanyWalletTransactionDetails();
+    getUserWalletTransactionsByRemitter();
