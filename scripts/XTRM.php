@@ -160,8 +160,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $wallet){
                     echo $wallet." = ".$part."<br>";
@@ -218,8 +216,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -290,8 +286,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $wallet=>$part){
@@ -393,8 +387,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -457,8 +449,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -524,8 +514,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -596,8 +584,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -649,8 +635,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -704,8 +688,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -778,8 +760,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -912,8 +892,6 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -923,7 +901,237 @@
             }
         }
     }
+
+
+
+    //Use this function to fund a company wallet by credit card
+    function fundCompanyWalletUsingCreditCard()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        
+        //Payment details
+        $amount = filter_input(INPUT_POST,'amount');
+        $currency_code = filter_input(INPUT_POST,'currency_code');
+        $wallet_id = filter_input(INPUT_POST,'wallet_id');
+        
+        //Payer Info
+        $first_name = filter_input(INPUT_POST,'first_name');
+        $last_name = filter_input(INPUT_POST,'last_name');
+        $address = filter_input(INPUT_POST,'address');
+        $city = filter_input(INPUT_POST,'city');
+        $state = filter_input(INPUT_POST,'state');
+        $country_code = filter_input(INPUT_POST,'country_code');
+        $postal_code = filter_input(INPUT_POST,'postal_code');
+
+        //Card details
+        $exp_month = filter_input(INPUT_POST,'exp_month');
+        $exp_year = filter_input(INPUT_POST,'exp_year');
+        $card_number = filter_input(INPUT_POST,'card_number');
+        $card_type = filter_input(INPUT_POST,'card_type');
+        $cvv = filter_input(INPUT_POST,'cvv');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "FundCompanyWalletUsingCreditCardRequest"=>[
+                "Request"=>[
+                    "PaymentDetails"=>[
+                        "IssuerAccountNumber"=>$I_A_N,
+                        "Amount"=>$amount,
+                        "CurrencyCode"=>$currency_code,
+                        "WalletID"=>$wallet_id
+                    ],
+                    "PayerInformation"=>[
+                        "FirstName"=>$first_name,
+                        "LastName"=>$last_name
+                    ],
+                    "PayerBillingAddress"=>[
+                        "Address1"=>$address,
+                        "City"=>$city,
+                        "State"=>$state,
+                        "CountryISO2"=>$country_code,
+                        "PostalCode"=>$postal_code
+                    ],
+                    "CreditCardDetails"=>[
+                        "ExpireMonth"=>$exp_month,
+                        "ExpireYear"=>$exp_year,
+                        "CreditCardNumber"=>$card_number,
+                        "CreditCardType"=>$card_type,
+                        "CVV"=>$cvv
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactionsByRemitter',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
     
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $details=>$part){
+                        echo $details." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to fund a company wallet by linked bank ACH debit
+    function fundWalletUsingACHDebit()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        
+        //Payment details
+        $amount = filter_input(INPUT_POST,'amount');
+        $currency_code = filter_input(INPUT_POST,'currency_code');
+        $wallet_id = filter_input(INPUT_POST,'wallet_id');
+        $linked_bank = filter_input(INPUT_POST,'linked_bank');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "FundWalletUsingACHDebitRequest"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "Amount"=>$amount,
+                    "CurrencyCode"=>$currency_code,
+                    "WalletID"=>$wallet_id,
+                    "LinkedBankID"=>$linked_bank
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/FundWalletUsingACHDebit',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
     
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $details=>$part){
+                        echo $details." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve a list of beneficiary linked bank accounts
+    function getLinkedBankAccounts()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetLinkedBankAccounts"=>[
+                "request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "RecipientUserId"=>$u_id
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Bank/GetLinkedBankAccounts',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
     
-    getUserWalletTransactionsByRemitter();
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $beneficiaries){
+                        foreach($beneficiaries as $details=>$detail){
+                            echo $details." = ".$detail."<br>";
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    getLinkedBankAccounts();
