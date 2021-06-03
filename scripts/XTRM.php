@@ -18,6 +18,12 @@
     $user_email = filter_input(INPUT_POST,'user_email');
     $u_id = filter_input(INPUT_POST,'user_id');
 
+    $wallet_id = filter_input(INPUT_POST,'wallet_id');
+    $wallet_name = filter_input(INPUT_POST,'wallet_name');
+    $wallet_currency = filter_input(INPUT_POST,'wallet_currency');
+    $wallet_type = filter_input(INPUT_POST,'wallet_type');
+    $transaction_id = filter_input(INPUT_POST,'transaction_id');
+
 
 
     function getAuthToken()
@@ -113,10 +119,13 @@
         global $I_A_N;
         global $A_A_N;
         global $endpoint;
+        global $wallet_name;
+        global $wallet_currency;
+        global $wallet_type;
 
-        $company_wallet_name = filter_input(INPUT_POST,'company_wallet_name');
-        $company_wallet_currency = filter_input(INPUT_POST,'company_wallet_currency');
-        $company_wallet_type = filter_input(INPUT_POST,'company_wallet_type');
+        $company_wallet_name = $wallet_name;
+        $company_wallet_currency = $wallet_currency;
+        $company_wallet_type = $wallet_type;
         
         $curl = curl_init();
 
@@ -242,9 +251,11 @@
         
         global $I_A_N;
         global $endpoint;
+        global $wallet_id;
+        global $wallet_name;
 
-        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
-        $company_wallet_name = filter_input(INPUT_POST,'company_wallet_name');
+        $company_wallet_id = $wallet_id;
+        $company_wallet_name = $wallet_name;
         
         $curl = curl_init();
 
@@ -306,12 +317,8 @@
         global $endpoint;
         global $I_A_N;
         
-        $name = filter_input(INPUT_POST,'name');
-        $names = split(' ',$name);
-        $name_length = $names.length();
-        $fname = $names[0];
-        $lname = $names[$name_length - 1];
-        
+        $fname = filter_input(INPUT_POST,'first_name');
+        $lname = filter_input(INPUT_POST,'last_name');
         $email = filter_input(INPUT_POST,'email');
         $email_notification = filter_input(INPUT_POST,'email_notification');
         $mobile_number = filter_input(INPUT_POST,'mobile_number');
@@ -539,9 +546,11 @@
         global $I_A_N;
         global $u_id;
         global $endpoint;
+        global $wallet_name;
+        global $wallet_currency;
 
-        $user_wallet_name = filter_input(INPUT_POST,'user_wallet_name');
-        $user_wallet_currency = filter_input(INPUT_POST,'user_wallet_currency');
+        $user_wallet_name = $wallet_name;
+        $user_wallet_currency = $wallet_currency;
         
         $curl = curl_init();
 
@@ -779,8 +788,7 @@
         
         global $I_A_N;
         global $endpoint;
-
-        $company_wallet_transaction_id = filter_input(INPUT_POST,'company_wallet_id');
+        global $transaction_id;
         
         $curl = curl_init();
 
@@ -788,7 +796,7 @@
             "GetCompanyWalletTransactionDetails"=>[
                 "Request"=>[
                     "IssuerAccountNumber"=>$I_A_N,
-                    "TransactionID"=>$company_wallet_transaction_id
+                    "TransactionID"=>$transaction_id
                 ]
             ]
         ];
@@ -827,6 +835,74 @@
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
                         echo $fields." = ".$field."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve details of a beneficiary user's wallet transactions
+    function getUserWalletTransactions()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $u_id;
+        global $endpoint;
+        global $wallet_currency;
+        
+        $user_wallet_currency = $wallet_currency;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetUserWalletTransactions"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "UserID"=>$u_id,
+                    "WalletCurrency"=>$user_wallet_currency,
+                    "Pagination"=>[
+                        "RecordsToSkip"=>"1",
+                        "RecordsToTake"=>"10"
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactions',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $transaction=>$part){
+                        echo $transaction." = ".$part."<br>";
                     }
                 }
             }
@@ -1260,4 +1336,493 @@
 
 
 
+    //Use this function to update a beneficiary user account
+    function updateUser()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        
+        $fname = filter_input(INPUT_POST,'first_name');
+        $lname = filter_input(INPUT_POST,'last_name');
+        $email = filter_input(INPUT_POST,'email');
+        $email_notification = filter_input(INPUT_POST,'email_notification');
+        $mobile_number = filter_input(INPUT_POST,'mobile_number');
+        $taxID = filter_input(INPUT_POST,'$tax_id');
+        $day = "";
+        $month = "";
+        $year = "";
+        $address1 = filter_input(INPUT_POST,'address_1');
+        $address2 = filter_input(INPUT_POST,'address_2');
+        $apt_number = filter_input(INPUT_POST,'apartment');
+        $city = filter_input(INPUT_POST,'city');
+        $country = filter_input(INPUT_POST,'country');
+        $currency_code = filter_input(INPUT_POST,'currency_type');
+        $postal_code = filter_input(INPUT_POST,'postal_code');
+        $region = filter_input(INPUT_POST,'region');
+
+        $curl = curl_init();
+
+        $request_fields = [
+            "UpdateUser"=> [
+                "request"=> [
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "UserId"=>$u_id,                         
+                    "LegalFirstName"=>$fname,
+                    "LegalLastName"=>$lname,
+                    "EmailAddress"=>$email,
+                    "EmailNotification"=>$email_notification,
+                    "MobilePhone"=>$mobile_number,
+                    "TaxId"=>$taxID,
+                    "DateOfBirth"=>[
+                        "Day"=>$day,
+                        "Month"=>$month,
+                        "Year"=>$year
+                    ],
+                    "Address"=>[
+                        "AddressLine1"=>$address1,
+                        "AddressLine2"=>$address2,
+                        "AptSuitNum"=>$apt_number,
+                        "City"=>$city,
+                        "Country"=>$country,
+                        "CountryISO2"=>$currency_code,
+                        "PostalCode"=>$postal_code,
+                        "Region"=>$region
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Register/UpdateUser',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
     
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $result){
+                    foreach($result as $user=>$part){
+                        echo $user." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to update a beneficiary user's wallet
+    function upateUserWallet()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        global $wallet_id;
+        global $wallet_name;
+
+        $user_wallet_id = $wallet_id;
+        $user_wallet_name = $wallet_name;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "UpdateUserWallet"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "UserID"=>$u_id,
+                    "WalletID"=>$user_wallet_id,
+                    "WalletName"=>$user_wallet_name
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Wallet/UpdateUserWallet',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $result){
+                    foreach($result as $wallet=>$part){
+                        echo $wallet." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve details of a beneficiary user's wallet transaction
+    function getUserWalletTransactionDetails()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        global $transaction_id;
+
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetUserWalletTransactionDetails"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "UserID"=>$u_id,
+                    "TransactionID"=>$transaction_id
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactionDetails',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $fields=>$field){
+                        echo $fields." = ".$field."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve ultimate remitter wallets
+    function getBeneficiaries()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetBeneficiaries"=>[
+                "request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "Pagination"=>[
+                        "RecordsToSkip"=>"1",
+                        "RecordsToTake"=>"10"
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Beneficiary/GetBeneficiaries',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $results){
+                        foreach($results as $beneficiaries){
+                            foreach($beneficiaries as $beneficiaryDetails){
+                                foreach($beneficiaryDetails as $detail=>$part){
+                                    echo $detail." = ".$part."<br>";
+                                }
+                                echo "<br>";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to view a list of a company's beneficiaries
+    function checkBeneficiaryExist()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        
+        $company_name = filter_input(INPUT_POST,'company_name');
+
+        $curl = curl_init();
+
+        $request_fields = [
+            "CheckBeneficiaryExist"=>[
+                "request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "CompanyName"=>$company_name
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Beneficiary/CheckBeneficiaryExist',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $results){
+                        foreach($results as $beneficiary){
+                            foreach($beneficiary as $detail=>$part){
+                                echo $detail." = ".$part."<br>";
+                            }
+                            echo "<br>";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve a list of a beneficiary wallet's transactions
+    function getBeneficiaryWallets()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetBeneficiaryWallets"=>[  
+                "request"=>[  
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "BeneficiaryAccountNumber"=>$u_id
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Wallet/GetBeneficiaryWallets',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $results){
+                        foreach($results as $wallets){
+                            foreach($wallets as $detail=>$part){
+                                echo $detail." = ".$part."<br>";
+                            }
+                            echo "<br>";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to retrieve a beneficiary user's wallet balance
+    function getUserWalletBalance()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        global $wallet_currency;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetUserWalletBalance"=>[  
+                "request"=>[  
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "BeneficiaryAccountNumber"=>$u_id,
+                    "Currency"=>$wallet_currency
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Wallet/GetUserWalletBalance',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $result){
+                        foreach($result as $detail=>$part){
+                            echo $detail." = ".$part."<br>";
+                        }
+                        echo "<br>";
+                    }
+                }
+            }
+        }
+    }
