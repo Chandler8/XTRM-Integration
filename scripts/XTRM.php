@@ -1133,5 +1133,131 @@
             }
         }
     }
+
+
+
+    //Use this function to delete a beneficiary's linked bank account
+    function deleteBankBeneficiary()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $R_A_N;
+        global $endpoint;
+        global $u_id;
+
+        $bank_id = filter_input(INPUT_POST,'linked_bank');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "DeleteBankBeneficiary"=>[
+                "request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "RecipientAccountNumber"=>$u_id,
+                    "BeneficiaryBankID"=>$bank_id
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Bank/DeleteBankBeneficiary',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
     
-    getLinkedBankAccounts();
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $result=>$part){
+                        echo $result." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to get a list of beneficiary ACH debit linked bank accounts
+    function getBeneficiaryACHDebitLinkedBankAccounts()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetACHDebitLinkedBankAccounts"=>[
+                "request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "RecipientUserId"=>$u_id
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Bank/GetACHDebitLinkedBankAccounts',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $details=>$part){
+                        echo $details." = ".$part."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    
