@@ -2079,3 +2079,77 @@
             }
         }
     }
+
+
+
+    //Use this function to search for banks by name in a country 
+    function searchBank()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        
+        $bank_name = filter_input(INPUT_POST,'bank_name');
+        $country = filter_input(INPUT_POST,'country');
+
+        $curl = curl_init();
+
+        $request_fields = [
+            "SearchBank"=>[
+                "request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "BankName"=>$bank_name,
+                    "BankCountryISO2"=>$country,
+                    "Pagination"=>[
+                        "RecordsToSkip"=>1,
+                        "RecordsToTake"=>10
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Bank/SearchBank',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $banks=>$bank){
+                        //echo $banks."<br>";
+                        foreach($bank as $details=>$detail){
+                            //echo $details." = ".$detail."<br>";
+                            foreach($detail as $part=>$piece){
+                                echo $part." = ".$piece."<br>";
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }

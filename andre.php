@@ -122,6 +122,16 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-group user-group find-bank col-6">
+                            <label for="bank_name">Bank name</label>
+                            <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter the bank name to search">
+                        </div>
+                        <div class="form-group user-group find-bank col-6">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="country" name="country" placeholder="Enter the country of the bank to search">
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
                             <button type="submit" class="btn btn-success">Submit</button>
