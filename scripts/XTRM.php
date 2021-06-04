@@ -14,7 +14,8 @@
     $A_A_N = "";
     $R_A_N = "";
 
-    $user_name = filter_input(INPUT_POST,'user_name');
+    $first_name = filter_input(INPUT_POST,'first_name');
+    $last_name = filter_input(INPUT_POST,'last_name');
     $user_email = filter_input(INPUT_POST,'user_email');
     $u_id = filter_input(INPUT_POST,'user_id');
 
@@ -22,6 +23,7 @@
     $wallet_name = filter_input(INPUT_POST,'wallet_name');
     $wallet_currency = filter_input(INPUT_POST,'wallet_currency');
     $wallet_type = filter_input(INPUT_POST,'wallet_type');
+    $currency_code = filter_input(INPUT_POST,'currency_code');
     $transaction_id = filter_input(INPUT_POST,'transaction_id');
 
 
@@ -316,10 +318,10 @@
         
         global $endpoint;
         global $I_A_N;
+        global $first_name;
+        global $last_name;
+        global $user_email;
         
-        $fname = filter_input(INPUT_POST,'first_name');
-        $lname = filter_input(INPUT_POST,'last_name');
-        $email = filter_input(INPUT_POST,'email');
         $email_notification = filter_input(INPUT_POST,'email_notification');
         $mobile_number = filter_input(INPUT_POST,'mobile_number');
         $taxID = filter_input(INPUT_POST,'$tax_id');
@@ -341,9 +343,9 @@
             "CreateUser"=> [
                 "request"=> [
                     "IssuerAccountNumber"=>$I_A_N,                           
-                    "LegalFirstName"=>$fname,
-                    "LegalLastName"=>$lname,
-                    "EmailAddress"=>$email,
+                    "LegalFirstName"=>$first_name,
+                    "LegalLastName"=>$last_name,
+                    "EmailAddress"=>$user_email,
                     "EmailNotification"=>$email_notification,
                     "MobilePhone"=>$mobile_number,
                     "TaxId"=>$taxID,
@@ -986,16 +988,16 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
+        global $first_name;
+        global $last_name;
+        global $currency_code;
+        global $wallet_id;
         global $endpoint;
         
         //Payment details
         $amount = filter_input(INPUT_POST,'amount');
-        $currency_code = filter_input(INPUT_POST,'currency_code');
-        $wallet_id = filter_input(INPUT_POST,'wallet_id');
         
         //Payer Info
-        $first_name = filter_input(INPUT_POST,'first_name');
-        $last_name = filter_input(INPUT_POST,'last_name');
         $address = filter_input(INPUT_POST,'address');
         $city = filter_input(INPUT_POST,'city');
         $state = filter_input(INPUT_POST,'state');
@@ -1344,10 +1346,11 @@
         global $I_A_N;
         global $endpoint;
         global $u_id;
+        global $first_name;
+        global $last_name;
+        global $user_email;
+        global $currency_code;
         
-        $fname = filter_input(INPUT_POST,'first_name');
-        $lname = filter_input(INPUT_POST,'last_name');
-        $email = filter_input(INPUT_POST,'email');
         $email_notification = filter_input(INPUT_POST,'email_notification');
         $mobile_number = filter_input(INPUT_POST,'mobile_number');
         $taxID = filter_input(INPUT_POST,'$tax_id');
@@ -1359,7 +1362,6 @@
         $apt_number = filter_input(INPUT_POST,'apartment');
         $city = filter_input(INPUT_POST,'city');
         $country = filter_input(INPUT_POST,'country');
-        $currency_code = filter_input(INPUT_POST,'currency_type');
         $postal_code = filter_input(INPUT_POST,'postal_code');
         $region = filter_input(INPUT_POST,'region');
 
@@ -1370,9 +1372,9 @@
                 "request"=> [
                     "IssuerAccountNumber"=>$I_A_N,
                     "UserId"=>$u_id,                         
-                    "LegalFirstName"=>$fname,
-                    "LegalLastName"=>$lname,
-                    "EmailAddress"=>$email,
+                    "LegalFirstName"=>$first_name,
+                    "LegalLastName"=>$last_name,
+                    "EmailAddress"=>$user_email,
                     "EmailNotification"=>$email_notification,
                     "MobilePhone"=>$mobile_number,
                     "TaxId"=>$taxID,
@@ -1821,6 +1823,257 @@
                             echo $detail." = ".$part."<br>";
                         }
                         echo "<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to get a list of digital gift cards supported by XTRM
+    function getDigitalGiftCards()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $wallet_currency;
+        global $endpoint;
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetGiftCards"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "Currency"=>$wallet_currency,
+                    "Pagination"=>[
+                        "RecordsToSkip"=>"1",
+                        "RecordsToTake"=>"20"
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/GiftCard/GetDigitalGiftCards',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $results){
+                        foreach($results as $gift_cards){
+                            foreach($gift_cards as $details=>$detail){
+                                echo $details." = ".$detail."<br>";
+                                
+                                foreach($detail as $items=>$parts){
+                                    //echo $items." = ".$parts."<br><br>";
+                                    
+                                    foreach($parts as $part=>$pieces){
+                                        echo "&emsp;".$part." = ".$pieces."<br>&emsp;&emsp;";
+
+                                        foreach($pieces as $piece=>$item){
+                                            echo $item.", ";
+                                        }
+                                       // echo "<br>";
+                                    }
+                                    echo "<br>";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to transfer funds from a company wallet to a beneficiary wallet
+    function transferFund()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $wallet_currency;
+        global $endpoint;
+        global $currency_code;
+
+        $payment_method_id = filter_input(INPUT_POST,'payment_method_id');
+        $amount = filter_input(INPUT_POST,'amount');
+        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        $email_notification = filter_input(INPUT_POST,'email_notification');
+        $linked_bank = filter_input(INPUT_POST,'bank_id');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "Transaction"=>[
+                "IssuerAccountNumber"=>$I_A_N,
+                "PaymentType"=>"Personal",
+                "PaymentMethodId"=>$payment_method_id,
+                "ProgramId"=>"Use 'GetPrograms' to get Program ID",
+                "WalletID"=>$company_wallet_id,
+                "PaymentDescription"=>"Payment Description",
+                "PaymentCurrency"=>$currency_code,
+                "EmailNotification"=>$email_notification,        
+                "TransactionDetails"=>[
+                    [
+                        "IssuerTransactionId"=>"Unique ID",
+                        "PaymentAmount"=>$amount,
+                        "PartnerAccountNumber"=>"SPN Account Number",
+                        "RecipientUserId"=>$u_id,
+                        "UserLinkedBankID"=>$linked_bank,
+                        "UserPayPalEmailID"=>"User PayPal Email ID",
+                        "UserPrepaidVisaEmailID"=>"User Prepaid Virtual Visa Email ID",
+                        "UserGiftCardEmailID"=>"User Digital Gift Card Email ID",
+                        "sku"=>"Use 'GetGiftCards' to get sku",
+                        "DealRegId"=>"Deal_Reg_ID",
+                        "Comment"=>"Comment"
+                    ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Fund/TransferFund',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $results){
+                        foreach($results as $transactions){
+                            foreach($transactions as $details=>$detail){
+                                echo $details." = ".$detail."<br>";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to transfer funds from a company wallet to a beneficiary wallet,
+    //dynamically creating a beneficiary user if the email is not already in XTRM's system.
+    function transferFundDynamicAccountCreateUser()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $wallet_id;
+        global $currency_code;
+        global $first_name;
+        global $last_name;
+        global $endpoint;
+
+        $amount = filter_input(INPUT_POST,'amount');
+        $recipient_email = filter_input(INPUT_POST,'recipient_email');
+        $description = filter_input(INPUT_POST,'description');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "TransferFundToDynamicAccountUser"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "FromAccountNumber"=>"SPN Issuer Account Number",
+                    "FromWalletID"=>$wallet_id,
+                    "RecipientFirstName"=>$first_name, 
+                    "RecipientLastName"=>$last_name,
+                    "RecipientEmail"=>$recipient_email,
+                    "Currency"=>$currency_code,
+                    "Amount"=>$amount,
+                    "Description"=>$description
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Fund/TransferFundDynamicAccountCreateUser',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $result){
+                        foreach($result as $transaction){
+                            foreach($transaction as $details=>$detail){
+                                echo $details." = ".$detail."<br>";
+                            }
+                        }
                     }
                 }
             }
