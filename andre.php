@@ -127,8 +127,8 @@
                             <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter the bank name to search">
                         </div>
                         <div class="form-group user-group find-bank col-6">
-                            <label for="country">Country</label>
-                            <input type="text" class="form-control" id="country" name="country" placeholder="Enter the country of the bank to search">
+                            <label for="country_code">Country</label>
+                            <input type="text" class="form-control" id="country_code" name="country_code" placeholder="Enter the country of the bank to search">
                         </div>
                     </div>
                     <div class="form-row">

@@ -6,7 +6,7 @@
      * Scripts for testing XTRM API Calls.
      */
 
-    //GLOBAL VARIABLES
+  //GLOBAL VARIABLES
     $auth_str = 'grant_type=password&client_id=1930815_API_User&client_secret=TrXSmMCkrGTq2UVsOYMloiPmpwdvIkVrE56DJAkOBkg=';
     $refresh_str = 'grant_type=password&client_id=1930815_API_User&client_secret=TrXSmMCkrGTq2UVsOYMloiPmpwdvIkVrE56DJAkOBkg=&refresh_token=ad7e1b4cfe904d88abbcc2fe70828fb9';
     $endpoint = "https://xapisandbox.xtrm.com";
@@ -14,18 +14,34 @@
     $A_A_N = "";
     $R_A_N = "";
 
+    //User info
+    $u_id = filter_input(INPUT_POST,'user_id');
     $first_name = filter_input(INPUT_POST,'first_name');
     $last_name = filter_input(INPUT_POST,'last_name');
     $user_email = filter_input(INPUT_POST,'user_email');
-    $u_id = filter_input(INPUT_POST,'user_id');
+    $email_notification = filter_input(INPUT_POST,'email_notification');
+    $mobile_number = filter_input(INPUT_POST,'mobile_number');
+    $taxID = filter_input(INPUT_POST,'$tax_id');
+    $day = "";
+    $month = "";
+    $year = "";
+    $address1 = filter_input(INPUT_POST,'address_1');
+    $address2 = filter_input(INPUT_POST,'address_2');
+    $apt_number = filter_input(INPUT_POST,'apartment');
+    $city = filter_input(INPUT_POST,'city');
+    $country_code = filter_input(INPUT_POST,'country_code');
+    $postal_code = filter_input(INPUT_POST,'postal_code');
+    $region = filter_input(INPUT_POST,'region');
 
+    //Wallet info
     $wallet_id = filter_input(INPUT_POST,'wallet_id');
     $wallet_name = filter_input(INPUT_POST,'wallet_name');
     $wallet_currency = filter_input(INPUT_POST,'wallet_currency');
     $wallet_type = filter_input(INPUT_POST,'wallet_type');
     $currency_code = filter_input(INPUT_POST,'currency_code');
     $transaction_id = filter_input(INPUT_POST,'transaction_id');
-
+    
+    $bank_name = filter_input(INPUT_POST,'bank_name');
 
 
     function getAuthToken()
@@ -1349,14 +1365,14 @@
         global $first_name;
         global $last_name;
         global $user_email;
+        global $email_notification;
+        global $mobile_number;
+        global $taxID;
+        global $day;
+        global $month;
+        global $year;
         global $currency_code;
         
-        $email_notification = filter_input(INPUT_POST,'email_notification');
-        $mobile_number = filter_input(INPUT_POST,'mobile_number');
-        $taxID = filter_input(INPUT_POST,'$tax_id');
-        $day = "";
-        $month = "";
-        $year = "";
         $address1 = filter_input(INPUT_POST,'address_1');
         $address2 = filter_input(INPUT_POST,'address_2');
         $apt_number = filter_input(INPUT_POST,'apartment');
@@ -2088,11 +2104,10 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
+        global $country_code;
+        global $bank_name;
         global $endpoint;
         
-        $bank_name = filter_input(INPUT_POST,'bank_name');
-        $country = filter_input(INPUT_POST,'country');
-
         $curl = curl_init();
 
         $request_fields = [
@@ -2100,7 +2115,7 @@
                 "request"=>[
                     "IssuerAccountNumber"=>$I_A_N,
                     "BankName"=>$bank_name,
-                    "BankCountryISO2"=>$country,
+                    "BankCountryISO2"=>$country_code,
                     "Pagination"=>[
                         "RecordsToSkip"=>1,
                         "RecordsToTake"=>10
@@ -2146,6 +2161,112 @@
                             foreach($detail as $part=>$piece){
                                 echo $part." = ".$piece."<br>";
 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //Use this function to link a bank to a beneficiary wallet
+    function linkACHDebitBankBeneficiary()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $u_id;
+        global $wallet_id;
+        global $currency_code;
+        global $first_name;
+        global $last_name;
+        global $mobile_number;
+        global $address1;
+        global $address2;
+        global $city;
+        global $region;
+        global $postal_code;
+        global $country_code;
+        global $bank_name;
+        global $endpoint;
+
+        $amount = filter_input(INPUT_POST,'amount');
+        $recipient_email = filter_input(INPUT_POST,'recipient_email');
+        $description = filter_input(INPUT_POST,'description');
+        
+        $curl = curl_init();
+
+        $request_fields = [
+            "LinkACHDebitBankBeneficiary"=>[
+                "request"=>[
+                  "IssuerAccountNumber"=>$I_A_N,
+                  "UserID"=>$u_id,
+                  "Beneficiary"=>[  
+                    "BeneficiaryDetails"=>[  
+                      "BeneficiaryInformation"=>[  
+                        "ContactName"=>$first_name." ".$last_name,
+                        "PhoneNumber"=>$mobile_number,
+                        "AddressLine1"=>$address1,
+                        "AddressLine2"=>$address2,
+                        "City"=>$city,
+                        "Region"=>$region,
+                        "PostalCode"=>$postal_code,
+                        "CountryISO2"=>$country_code
+                      ]
+                      ],
+                    "BankDetails"=>[  
+                      "BeneficiaryBankInformation"=>[  
+                        "InstitutionName"=>$bank_name,
+                        "Currency"=>$currency_code,
+                        "SWIFTBIC"=>"Unique identifier for the bank",
+                        "AccountNumber"=>"Bank account number",
+                        "RoutingNumber"=>"Bank routing code/National Bank Code",
+                        "CountryISO2"=>$country_code,
+                        "RemittanceLine3"=>"Remittance Line3",
+                        "RemittanceLine4"=>"Remittance Line4"
+                      ]
+                    ]
+                  ]
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/v4/Bank/LinkACHDebitBankBeneficiary',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $resp){
+                    foreach($resp as $result){
+                        foreach($result as $transaction){
+                            foreach($transaction as $details=>$detail){
+                                echo $details." = ".$detail."<br>";
                             }
                         }
                     }
