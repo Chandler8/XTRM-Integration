@@ -42,6 +42,8 @@
     $transaction_id = filter_input(INPUT_POST,'transaction_id');
     
     $bank_name = filter_input(INPUT_POST,'bank_name');
+    $bank_account_number = filter_input(INPUT_POST,'$ba_number');
+    $bank_routing_number = filter_input(INPUT_POST,'routing_number');
 
 
     function getAuthToken()
@@ -263,7 +265,7 @@
 
 
     //Use this function to update an ultimate remitter wallet
-    function upateCompanyWallet()
+    function updateCompanyWallet()
     {
         $token = refreshAuthToken();
         
@@ -2172,7 +2174,7 @@
 
 
     //Use this function to link a bank to a beneficiary wallet
-    function linkACHDebitBankBeneficiary()
+    function linkBankBeneficiary()
     {
         $token = refreshAuthToken();
         
@@ -2190,16 +2192,19 @@
         global $postal_code;
         global $country_code;
         global $bank_name;
+        global $bank_account_number;
+        global $bank_routing_number;
         global $endpoint;
 
-        $amount = filter_input(INPUT_POST,'amount');
-        $recipient_email = filter_input(INPUT_POST,'recipient_email');
-        $description = filter_input(INPUT_POST,'description');
+        $swift_id = filter_input(INPUT_POST,'swift_id');
+        $withdraw_type = filter_input(INPUT_POST,'withdraw_type');
+        $remittance_line3 = filter_input(INPUT_POST,'remittance3');
+        $remittance_line4 = filter_input(INPUT_POST,'remittance4');
         
         $curl = curl_init();
 
         $request_fields = [
-            "LinkACHDebitBankBeneficiary"=>[
+            "LinkBankBeneficiary"=>[
                 "request"=>[
                   "IssuerAccountNumber"=>$I_A_N,
                   "UserID"=>$u_id,
@@ -2219,13 +2224,14 @@
                     "BankDetails"=>[  
                       "BeneficiaryBankInformation"=>[  
                         "InstitutionName"=>$bank_name,
+                        "WithdrawType"=>$withdraw_type,
                         "Currency"=>$currency_code,
-                        "SWIFTBIC"=>"Unique identifier for the bank",
-                        "AccountNumber"=>"Bank account number",
-                        "RoutingNumber"=>"Bank routing code/National Bank Code",
+                        "SWIFTBIC"=>$swift_id,
+                        "AccountNumber"=>$bank_account_number,
+                        "RoutingNumber"=>$bank_routing_number,
                         "CountryISO2"=>$country_code,
-                        "RemittanceLine3"=>"Remittance Line3",
-                        "RemittanceLine4"=>"Remittance Line4"
+                        "RemittanceLine3"=>$remittance_line3,
+                        "RemittanceLine4"=>$remittance_line4
                       ]
                     ]
                   ]
@@ -2236,7 +2242,7 @@
         $json_typed = json_encode($request_fields);
         
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $endpoint.'/API/v4/Bank/LinkACHDebitBankBeneficiary',
+            CURLOPT_URL => $endpoint.'/API/v4/Bank/LinkBankBeneficiary',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
