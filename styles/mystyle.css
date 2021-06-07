@@ -80,3 +80,12 @@ select {
 .container {
     font-family: 'Crimson Pro', serif;
 }
+
+#jumbo {
+    background-color: #489c1b;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
