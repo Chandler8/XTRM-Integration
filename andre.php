@@ -124,7 +124,15 @@
                     <div class="form-row">
                         <div class="form-group user-group find-bank col-6">
                             <label for="bank_name">Bank name</label>
+                            <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Name already provided" disabled>
+                        </div>
+                        <div class="form-group user-group find-bank col-6">
+                            <label for="bank_name">Bank account number</label>
                             <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter the bank name to search">
+                        </div>
+                        <div class="form-group user-group find-bank col-6">
+                            <label for="bank_name">Bank routing number</label>
+                            <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Routing number already provided" disabled>
                         </div>
                         <div class="form-group user-group find-bank col-6">
                             <label for="country_code">Country</label>

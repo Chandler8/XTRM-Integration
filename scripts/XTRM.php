@@ -41,9 +41,19 @@
     $currency_code = filter_input(INPUT_POST,'currency_code');
     $transaction_id = filter_input(INPUT_POST,'transaction_id');
     
-    $bank_name = filter_input(INPUT_POST,'bank_name');
+    /**
+     * From Nathan at XTRM:
+     * Use the information below for testing bank calls.
+     * 
+     * Bank name: Wells Fargo
+     * Routing number: 143906
+     * Any account number
+     */
+
+    $bank_name = "Wells Fargo"; //filter_input(INPUT_POST,'bank_name');
     $bank_account_number = filter_input(INPUT_POST,'$ba_number');
-    $bank_routing_number = filter_input(INPUT_POST,'routing_number');
+    $bank_routing_number = "143906"; //filter_input(INPUT_POST,'routing_number');
+
 
 
     function getAuthToken()
