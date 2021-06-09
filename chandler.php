@@ -305,6 +305,44 @@
         <p>Click here on this<a href="https://www.xtrm.com/web/Register/SponSimpleSignup.aspx" target="_blank"> link</a> to begin your XTRM setup.</p>
     </div>
 
+<br>
+
+<br>
+
+
+        <p>To set up your merchant services account with XTRM, please go to the following
+            <a href="andre.php">PAGE</a> </p>
+
+            <br>
+
+        <form action="{{ route('save-form-data') }}" method="POST" id="settingsForm" class="form-validate">
+        
+            <div class="setting_wrap_scroll">
+                <input type="hidden" name="section_name" value="FinanceSettings">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" placeholder="Email Address" name="KyckGlobal:email_address[value]" title="Email Address" data-type="crmfield" required>
+                    <!-- value="{{isset($pageData['fieldsData']['email_address']) ? $pageData['fieldsData']['email_address'] : ''}}" Needs to get input in the field above, after name and before title -->
+
+                    <input type="hidden" name="KyckGlobal:email_address[label]" value="Email Address">
+                    <input type="hidden" name="KyckGlobal:email_address[type]" value="text">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="text" class="form-control" placeholder="Password" name="KyckGlobal:password[value]" title="Password" data-type="crmfield" required>
+                    <!-- value="{{isset($pageData['fieldsData']['password']) ? $pageData['fieldsData']['password'] : ''}}" Needs to get input in the field above, after name and before title -->
+
+                    <input type="hidden" name="KyckGlobal:password[label]" value="Password">
+                    <input type="hidden" name="KyckGlobal:password[type]" value="text">
+                </div>
+            </div>
+
+            <button class="btn mt-2" id="settingsBtn">Save</button>
+
+        </form>
+
+    </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
