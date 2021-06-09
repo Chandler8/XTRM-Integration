@@ -529,6 +529,7 @@
 
 
     //Use this function to fund a company wallet by credit card
+    //NOT CURRENTLY USED
     function fundCompanyWalletUsingCreditCard()
     {
         $token = refreshAuthToken();
@@ -1501,6 +1502,67 @@
 
 
 
+    //Use this function to retrieve details of a beneficiary user's wallet transaction
+    function getUserWalletTransactionDetails()
+    {
+        $token = refreshAuthToken();
+        
+        global $I_A_N;
+        global $endpoint;
+        global $u_id;
+        global $transaction_id;
+
+        $curl = curl_init();
+
+        $request_fields = [
+            "GetUserWalletTransactionDetails"=>[
+                "Request"=>[
+                    "IssuerAccountNumber"=>$I_A_N,
+                    "UserID"=>$u_id,
+                    "TransactionID"=>$transaction_id
+                ]
+            ]
+        ];
+
+        $json_typed = json_encode($request_fields);
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactionDetails',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $json_typed,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer ".$token
+            )
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $resp = json_decode($response, true);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            foreach($resp as $resps){
+                foreach($resps as $results){
+                    foreach($results as $fields=>$field){
+                        echo $fields." = ".$field."<br>";
+                    }
+                }
+            }
+        }
+    }
+
+
 
     //Use this function to retrieve a list of beneficiary linked bank accounts
     function getLinkedBankAccounts()
@@ -1629,6 +1691,7 @@
 
 
     //Use this function to get a list of beneficiary ACH debit linked bank accounts
+    //NOT CURRENTLY USED
     function getBeneficiaryACHDebitLinkedBankAccounts()
     {
         $token = refreshAuthToken();
@@ -1851,72 +1914,11 @@
             }
         }
     }
-
-
-
-    //Use this function to retrieve details of a beneficiary user's wallet transaction
-    function getUserWalletTransactionDetails()
-    {
-        $token = refreshAuthToken();
-        
-        global $I_A_N;
-        global $endpoint;
-        global $u_id;
-        global $transaction_id;
-
-        $curl = curl_init();
-
-        $request_fields = [
-            "GetUserWalletTransactionDetails"=>[
-                "Request"=>[
-                    "IssuerAccountNumber"=>$I_A_N,
-                    "UserID"=>$u_id,
-                    "TransactionID"=>$transaction_id
-                ]
-            ]
-        ];
-
-        $json_typed = json_encode($request_fields);
-        
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactionDetails',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $json_typed,
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json",
-                "Authorization: Bearer ".$token
-            )
-        ));
-    
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        $resp = json_decode($response, true);
-
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            foreach($resp as $resps){
-                foreach($resps as $results){
-                    foreach($results as $fields=>$field){
-                        echo $fields." = ".$field."<br>";
-                    }
-                }
-            }
-        }
-    }
     
 
 
     //Use this function to retrieve a list of a beneficiary's wallets
+    //NOT CURRENTLY USED
     function getBeneficiaryWallets()
     {
         $token = refreshAuthToken();
