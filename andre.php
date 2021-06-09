@@ -22,11 +22,11 @@
             <h3>Select one:</h3>
             <div class="option-types">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="view-options" id="company-options" value="company-options">
+                    <input class="form-check-input option-type" type="radio" name="view-options" id="company-options" value="company-options">
                     <label class="form-check-label" for="company-options">View Company Options</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="view-options" id="inlineRadio2" value="beneficiary-options">
+                    <input class="form-check-input option-type" type="radio" name="view-options" id="beneficiary-options" value="beneficiary-options">
                     <label class="form-check-label" for="beneficiary-options">View Beneficiary Options</label>
                 </div>
             </div>
@@ -80,7 +80,7 @@
             </div>
             <hr>
             <div class="container">
-                <form action="scripts/XTRM.php" method="POST">
+                <form id="create-user-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group col-6">
                             <label for="fname">First Name</label>
@@ -144,7 +144,20 @@
                             <label for="postal">Postal Code</label>
                             <input type="text" class="form-control" id="postal" name="postal" placeholder="Enter postal code">
                         </div>
+                        <div class="form-group col-2">
+                            <label for="region">Region</label>
+                            <input type="text" class="form-control" id="region" name="region" placeholder="Enter your region">
+                        </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!--------------------------------------------------------------------------------------------------------------------------------->
+                <form id="get-user-wallet-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group find-user col-6">
                             <label for="u_id">User ID</label>
@@ -196,15 +209,20 @@
                         </div>
                     </div>
                 </form>
-                <form action="scripts/XTRM.php" method="POST">
+        <!--------------------------------------------------------------------------------------------------------------------------------->
+                <form id="update-user-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
-                        <div class="form-group user-group col-6">
+                        <div class="form-group user-group col-4">
                             <label for="fname">First Name</label>
                             <input type="text" class="form-control" id="fname" name="first_name" placeholder="Enter your first name">
                         </div>
-                        <div class="form-group user-group col-6">
+                        <div class="form-group user-group col-4">
                             <label for="lname">Last Name</label>
                             <input type="text" class="form-control" id="lname" name="last_name" placeholder="Enter your last name">
+                        </div>
+                        <div class="form-group user-group col-4">
+                            <label for="user_id">User ID</label>
+                            <input type="text" class="form-control" id="user_id" name="u_id" placeholder="Enter the user's ID">
                         </div>
                     </div>
                     <div class="form-row">
@@ -252,7 +270,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-10">
+                        <div class="form-group col-8">
                             <label for="country">Country</label>
                             <input type="text" class="form-control" id="country" name="country" placeholder="Enter country">
                         </div>
@@ -260,31 +278,70 @@
                             <label for="postal">Postal Code</label>
                             <input type="text" class="form-control" id="postal" name="postal" placeholder="Enter postal code">
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group user-group find-user col-6">
-                            <label for="u_id">User ID</label>
-                            <input type="text" class="form-control" id="u_id" name="user_id" placeholder="Enter your user ID">
+                        <div class="form-group col-2">
+                            <label for="region">Region</label>
+                            <input type="text" class="form-control" id="region" name="region" placeholder="Enter your region">
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group user-group find-user col-4">
-                            <label for="wallet_id">Wallet ID</label>
-                            <input type="text" class="form-control" id="wallet_id" name="wallet_id" placeholder="Enter your wallet ID">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
-                        <div class="form-group user-group find-user col-4">
-                            <label for="currency_type">Select type of wallet</label>
-                            <select class="custom-select" name="wallet_type" id="wallet_type">
-                                <option value="standard">Standard</option>
-                                <option value="accrual">Accrual</option>
-                            </select>
+                    </div>
+                </form>
+        <!--------------------------------------------------------------------------------------------------------------------------------->
+                <form id="link-beneficiary-bank-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group col-4">
+                            <label for="fname">First Name</label>
+                            <input type="text" class="form-control" id="fname" name="first_name" placeholder="Enter your first name">
                         </div>
-                        <div class="form-group user-group find-user col-4">
-                            <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                        <div class="form-group user-group col-4">
+                            <label for="lname">Last Name</label>
+                            <input type="text" class="form-control" id="lname" name="last_name" placeholder="Enter your last name">
+                        </div>
+                        <div class="form-group user-group col-4">
+                            <label for="user_id">User ID</label>
+                            <input type="text" class="form-control" id="user_id" name="u_id" placeholder="Enter the user's ID">
+                        </div>
+                    </div>
+                    <div class="form-group user-group col-6">
+                        <label for="m_num">Mobile Number</label>
+                        <input type="text" class="form-control" id="m_num" name="mobile_number" placeholder="Enter your mobile number">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-10">
+                            <label for="address1">Address</label>
+                            <input type="text" class="form-control" id="address1" name="address1" placeholder="Enter street address">
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="address2">Apt/Suite</label>
+                            <input type="text" class="form-control" id="address2" name="address2" placeholder="Enter suite number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-10">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter city">
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" name="state" placeholder="Enter state">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-8">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="country" name="country" placeholder="Enter country">
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="postal">Postal Code</label>
+                            <input type="text" class="form-control" id="postal" name="postal" placeholder="Enter postal code">
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="region">Region</label>
+                            <input type="text" class="form-control" id="region" name="region" placeholder="Enter your region">
                         </div>
                     </div>
                     <div class="form-row">
@@ -303,6 +360,66 @@
                         <div class="form-group user-group find-bank col-6">
                             <label for="country_code">Country</label>
                             <input type="text" class="form-control" id="country_code" name="country_code" placeholder="Enter the country of the bank to search">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="swift_id">SWIFTBIC</label>
+                            <input type="text" class="form-control" id="swift_id" name="swift_id" placeholder="Enter the bank's SWIFT#">
+                        </div>
+                        <div class="form-group user-group find-user col-4">
+                            <label for="withdraw_type">Select type of withdrawal</label>
+                            <select class="custom-select" name="withdraw_type" id="withdraw_type">
+                                <option value="checking">Checking</option>
+                                <option value="savings">Savings</option>
+                            </select>
+                        </div>
+                        <div class="form-group user-group find-user col-4">
+                            <label for="currency_type">Select currency type</label>
+                            <select class="custom-select" name="wallet_currency" id="currency_type">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!--------------------------------------------------------------------------------------------------------------------------------->
+                <form id="transfer-dynamic-create-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group col-3">
+                            <label for="fname">Recipient First Name</label>
+                            <input type="text" class="form-control" id="fname" name="first_name" placeholder="Enter recipient first name">
+                        </div>
+                        <div class="form-group user-group col-3">
+                            <label for="lname">Recipient Last Name</label>
+                            <input type="text" class="form-control" id="lname" name="last_name" placeholder="Enter recipient last name">
+                        </div>
+                        <div class="form-group user-group find-user col-6">
+                            <label for="email">Recipient Email Address</label>
+                            <input type="email" class="form-control" id="email" name="user_email" placeholder="Enter recipient email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group user-group col-2">
+                            <label for="amount">Amount</label>
+                            <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter amount to transfer, Ex: 235.67">
+                        </div>
+                        <div class="form-group user-group find-user col-2">
+                            <label for="currency_type">Select currency type</label>
+                            <select class="custom-select" name="wallet_currency" id="currency_type">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                        <div class="form-group user-group col-8">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Enter reason for the transfer">
                         </div>
                     </div>
                     <div class="form-row">

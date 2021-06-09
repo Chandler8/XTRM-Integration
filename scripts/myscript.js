@@ -13,4 +13,27 @@ $(document).ready(()=>{
     for(;i<currencies.length;i++){
         addCurrency(currencies[i]);
     }
+
+});
+
+function showCompanyOptions(){
+    $(".beneficiary-options-btns").addClass("d-none");
+    $(".company-options-btns").removeClass("d-none");
+}
+
+function showBeneficiaryOptions(){
+    $(".company-options-btns").addClass("d-none");
+    $(".beneficiary-options-btns").removeClass("d-none");
+}
+
+$(".option-type").change(function(){
+    var option_selected = $("input[name='view-options']:checked").val();
+
+    console.log(option_selected);
+
+    if(option_selected == 'beneficiary-options'){
+        showBeneficiaryOptions();
+    }else{
+        showCompanyOptions();
+    }
 });
