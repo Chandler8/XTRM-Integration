@@ -4,35 +4,49 @@
              x:Class="XTRM.MainPage"
 			 Padding="100,100,100,100">
 
+    <ScrollView>
+        <StackLayout>
 
-    <StackLayout>
 
+            <Button Text="To Payment Flow"  Pressed="To_Payments_Button_Pressed" />
 
-        <!--<ListView x:Name="postsListView">
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<TextCell Text="{Binding Title}" />
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>-->
-        <Button Text="Login User"  Pressed="Auth_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="authToken" />
-        <Button Text="Refresh Token"  Pressed="Refresh_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="refreshToken" />
-        <Button Text="Check User Exists"  Pressed="CheckUserExists_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="checkUser" />
-        <Button Text="Create User"  Pressed="CreateUser_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="createUser" />
-        <Button Text="Create User Wallet"  Pressed="CreateUserWallet_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="createUserWallet" />
-        <Button Text="Get User Wallet Balance"  Pressed="GetUserWalletBalance_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="getUserWalletBalance" />
-        <Button Text="Get Linked Bank Accounts (BROKEN)"  Pressed="GetLinkedBankAccounts_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="getLinkedBankAccounts" />
-        <Button Text="Get Payment Methods (BROKEN)"  Pressed="GetPaymentMethods_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="getPaymentMethods" />
-        <Button Text="Link Bank Beneficiary"  Pressed="LinkBankBeneficiary_Button_Pressed" />
-        <Label HorizontalOptions="Center" Text="" x:Name="linkBankBeneficiary" />
-    </StackLayout>
+            <Button Text="Login User"  Pressed="Auth_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="authToken" />
+
+            <Button Text="Refresh Token"  Pressed="Refresh_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="refreshToken" />
+
+            <Button Text="Check User Exists"  Pressed="CheckUserExists_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="checkUser" />
+
+            <Button Text="Create User"  Pressed="CreateUser_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="createUser" />
+
+            <Button Text="Create User Wallet"  Pressed="CreateUserWallet_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="createUserWallet" />
+
+            <Button Text="Get User Wallet Balance"  Pressed="GetUserWalletBalance_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="getUserWalletBalance" />
+
+            <Button Text="Get Linked Bank Accounts"  Pressed="GetLinkedBankAccounts_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="getLinkedBankAccounts" />
+
+            <Button Text="Get Payment Methods"  Pressed="GetPaymentMethods_Button_Pressed" />
+            <RefreshView>
+                <CollectionView HorizontalOptions="Center"  x:Name="getPaymentMethods">
+
+                    <CollectionView.EmptyView>
+                        <Label Text="" />
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </RefreshView>
+
+            <Button Text="Link Bank Beneficiary"  Pressed="LinkBankBeneficiary_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="linkBankBeneficiary" />
+
+            <Button Text="Transfer Funds"  Pressed="TransferFunds_Button_Pressed" />
+            <Label HorizontalOptions="Center" Text="" x:Name="transferFunds" />
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>

@@ -2,17 +2,17 @@
 --sgen-conc
 /target-framework:Xamarin.iOS,Version=v1.0
 --http-message-handler=NSUrlSessionHandler
-"--cache=/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/obj/iPhoneSimulator/Debug/device-builds/iphone 12 pro max-14.5/mtouch-cache"
-"--root-assembly=/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/bin/iPhoneSimulator/Debug/XTRM.iOS.exe"
+"--cache=/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/obj/iPhoneSimulator/Debug/device-builds/iphone 12 pro max-14.5/mtouch-cache"
+--root-assembly=/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/bin/iPhoneSimulator/Debug/XTRM.iOS.exe
 --sdkroot=/Applications/Xcode.app/Contents/Developer
 --targetver=8.0
-"--sim=/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/bin/iPhoneSimulator/Debug/device-builds/iphone 12 pro max-14.5/XTRM.iOS.app"
+"--sim=/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/bin/iPhoneSimulator/Debug/device-builds/iphone 12 pro max-14.5/XTRM.iOS.app"
 --executable=XTRM.iOS
 --nolink
 --sdk=14.5
 --aot-options=-O=-float32
 --abi=x86_64
-"--symbollist=/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/obj/iPhoneSimulator/Debug/device-builds/iphone 12 pro max-14.5/mtouch-symbols.list"
+"--symbollist=/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/obj/iPhoneSimulator/Debug/device-builds/iphone 12 pro max-14.5/mtouch-symbols.list"
 --dsym=no
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Microsoft.CSharp.dll
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/mscorlib.dll
@@ -24,7 +24,7 @@
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Numerics.Vectors.dll
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Xml.dll
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Xamarin.iOS.dll
-"--reference=/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/bin/Debug/netstandard2.0/XTRM.dll"
+--reference=/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/bin/Debug/netstandard2.0/XTRM.dll
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/Microsoft.Win32.Primitives.dll
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/Microsoft.Win32.Registry.AccessControl.dll
 --reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/Microsoft.Win32.Registry.dll
@@ -207,4 +207,4 @@
 --reference=/Users/senegalsoftware/.nuget/packages/xamarin.forms/5.0.0.2012/lib/Xamarin.iOS10/zh-HK/Xamarin.Forms.Platform.iOS.resources.dll
 --reference=/Users/senegalsoftware/.nuget/packages/xamarin.forms/5.0.0.2012/lib/Xamarin.iOS10/zh-Hans/Xamarin.Forms.Platform.iOS.resources.dll
 --reference=/Users/senegalsoftware/.nuget/packages/xamarin.forms/5.0.0.2012/lib/Xamarin.iOS10/zh-Hant/Xamarin.Forms.Platform.iOS.resources.dll
-"--reference=/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/bin/Debug/netstandard2.0/XTRM.dll"
+--reference=/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/bin/Debug/netstandard2.0/XTRM.dll

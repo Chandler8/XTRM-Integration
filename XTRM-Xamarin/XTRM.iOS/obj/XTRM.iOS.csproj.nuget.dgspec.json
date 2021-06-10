@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/XTRM.iOS.csproj": {}
+    "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/XTRM.iOS.csproj": {}
   },
   "projects": {
-    "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/XTRM.iOS.csproj": {
+    "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/XTRM.iOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/XTRM.iOS.csproj",
+        "projectUniqueName": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/XTRM.iOS.csproj",
         "projectName": "XTRM.iOS",
-        "projectPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/XTRM.iOS.csproj",
+        "projectPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/XTRM.iOS.csproj",
         "packagesPath": "/Users/senegalsoftware/.nuget/packages/",
-        "outputPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.iOS/obj/",
+        "outputPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.iOS/obj/",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -26,8 +26,8 @@
         "frameworks": {
           "xamarinios10": {
             "projectReferences": {
-              "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj": {
-                "projectPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj"
+              "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj": {
+                "projectPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj"
               }
             }
           }
@@ -67,14 +67,14 @@
         }
       }
     },
-    "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj": {
+    "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj",
+        "projectUniqueName": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj",
         "projectName": "XTRM",
-        "projectPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj",
+        "projectPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj",
         "packagesPath": "/Users/senegalsoftware/.nuget/packages/",
-        "outputPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/obj/",
+        "outputPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/senegalsoftware/.config/NuGet/NuGet.Config"

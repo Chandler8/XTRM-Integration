@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CvZFuQwCTMsimlarhNr+N6kiDPCVAmBTwOhvQiNmVeSb59HTbUgV260Mve4qLP3IRkBt9tft1X9tPJxUM680qA==",
+  "dgSpecHash": "/ehDfmXO1NnrTy/sfsHm/7eHkekMr6kCNlpf8S1nHBADCXr1nZqGu3xstj1jkJ7LLVnkgaKPyh8Z2I/pMskNgQ==",
   "success": true,
-  "projectFilePath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.Android/XTRM.Android.csproj",
+  "projectFilePath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.Android/XTRM.Android.csproj",
   "expectedPackageFiles": [
     "/Users/senegalsoftware/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/senegalsoftware/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",

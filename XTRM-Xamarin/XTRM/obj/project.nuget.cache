@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w5rUxKB1BgVunhOOJMI/4OWCjH6dooApuFA0AHe0mIh39MgAPJnHTOA6WLQsjxXdtcN529vZs1gz+RSjr4CS9w==",
+  "dgSpecHash": "CKuo6y5YIPmDW8ME81e4WiMtzpLan/SKclddFxjVeV9SPk681NCuUW1HTbRvm1JzrYBAirsjS3PeN/6hS904CQ==",
   "success": true,
-  "projectFilePath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj",
+  "projectFilePath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj",
   "expectedPackageFiles": [
     "/Users/senegalsoftware/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/senegalsoftware/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",

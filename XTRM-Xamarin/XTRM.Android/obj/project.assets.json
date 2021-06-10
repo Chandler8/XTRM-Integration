@@ -2268,11 +2268,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.Android/XTRM.Android.csproj",
+      "projectUniqueName": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.Android/XTRM.Android.csproj",
       "projectName": "XTRM.Android",
-      "projectPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.Android/XTRM.Android.csproj",
+      "projectPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.Android/XTRM.Android.csproj",
       "packagesPath": "/Users/senegalsoftware/.nuget/packages/",
-      "outputPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM.Android/obj/",
+      "outputPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM.Android/obj/",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -2287,8 +2287,8 @@
       "frameworks": {
         "monoandroid11.0": {
           "projectReferences": {
-            "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj": {
-              "projectPath": "/Users/senegalsoftware/Documents/Visual Studio/XTRM/XTRM/XTRM.csproj"
+            "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj": {
+              "projectPath": "/Users/senegalsoftware/Documents/XTRM-Integration/XTRM-Xamarin/XTRM/XTRM.csproj"
             }
           }
         }

@@ -21,26 +21,52 @@ namespace XTRM
 
 
 
+        async void To_Payments_Button_Pressed(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new PaymentsPage());
+        }
+
         async void Auth_Button_Pressed(System.Object sender, System.EventArgs e)
         {
-            dynamic token = await getAuthToken();
-            Application.Current.Properties.Add("access_token", token.access_token);
-            Application.Current.Properties.Add("refresh_token", token.refresh_token);
-            Application.Current.Properties.Add("expires_in", token.expires_in);
-            //string authorizationToken = Application.Current.Properties["access_token"].ToString();
-            authToken.Text = "Sign in successful.";
+            if (Application.Current.Properties.ContainsKey("access_token"))
+            {
+                authToken.Text = "You are already signed in";
+            }
+            else
+            {
+                dynamic token = await getAuthToken();
+                Application.Current.Properties.Add("access_token", token.access_token);
+                Application.Current.Properties.Add("refresh_token", token.refresh_token);
+                Application.Current.Properties.Add("expires_in", token.expires_in);
+                //string authorizationToken = Application.Current.Properties["access_token"].ToString();
+                authToken.Text = "Sign in successful.";
+            }
         }
 
         async void Refresh_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                refreshToken.Text = "Please sign in first.";
+                return;
+            }
+
             dynamic token = await refreshAuthToken();
             Application.Current.Properties["expires_in"] = token.expires_in;
             //refreshToken.Text = Application.Current.Properties["refresh_token"].ToString();
             refreshToken.Text = "Token refresh successful.";
+
         }
 
         async void CheckUserExists_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                checkUser.Text = "Please sign in first.";
+                return;
+            }
+
+
             dynamic userExists = await CheckUserExists();
             if (userExists.CheckUserExistResponse.CheckUserExistResult.Beneficiary == null)
             {
@@ -54,6 +80,11 @@ namespace XTRM
 
         async void CreateUser_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                createUser.Text = "Please sign in first.";
+                return;
+            }
 
             dynamic userData = await CreateUser();
 
@@ -69,6 +100,11 @@ namespace XTRM
 
         async void CreateUserWallet_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                createUserWallet.Text = "Please sign in first.";
+                return;
+            }
 
             dynamic walletData = await CreateUserWallet();
 
@@ -84,37 +120,73 @@ namespace XTRM
 
         async void GetUserWalletBalance_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                getUserWalletBalance.Text = "Please sign in first.";
+                return;
+            }
             dynamic walletBalanceData = await GetUserWalletBalance();
             getUserWalletBalance.Text = "Your wallet balance is " + walletBalanceData.UserWalletBalnceResponse.UserWalletBalanceResult.Balance + " " + walletBalanceData.UserWalletBalnceResponse.UserWalletBalanceResult.Currency;
         }
 
         async void GetLinkedBankAccounts_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                getLinkedBankAccounts.Text = "Please sign in first.";
+                return;
+            }
 
             dynamic bankAccountData = await GetLinkedBankAccount();
 
-            if (String.IsNullOrWhiteSpace(bankAccountData.GetLinkedBankAccountsResponse.GetLinkedBankAccountsResult.Beneficiary.BeneficiaryDetails))
-            {
-                createUserWallet.Text = "No bank account is linked to this user.";
+            var Beneficiary = bankAccountData.GetLinkedBankAccountsResponse.GetLinkedBankAccountsResult.Beneficiary;
 
+            if (Beneficiary == null || Beneficiary.BeneficiaryDetails == null)
+            {
+                getLinkedBankAccounts.Text = "No bank account is linked to this user.";
             }
             else
             {
-                createUserWallet.Text = bankAccountData.GetLinkedBankAccountsResponse.GetLinkedBankAccountResult.Beneficiary.BeneficiaryDetails;
+                getLinkedBankAccounts.Text = bankAccountData.GetLinkedBankAccountsResponse.GetLinkedBankAccountResult.Beneficiary.BeneficiaryDetails;
             }
+
+
+
+
         }
 
         async void GetPaymentMethods_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                getPaymentMethods.ItemsSource = new ObservableCollection<string> { "Please sign in first." };
+                return;
+            }
 
             dynamic paymentMethodsData = await GetPaymentMethods();
 
-            getPaymentMethods.Text = paymentMethodsData.GetUserPaymentMethodsResponse.UserPaymentMethodResult.UserPaymentMethods.UserPaymentMethodDetails[0].UserPaymentMethodName;
+            var paymentMethodsArr = paymentMethodsData.GetUserPaymentMethodsResponse.UserPaymentMethodResult.UserPaymentMethods.UserPaymentMethodDetails;
+
+            ObservableCollection<string> paymentMethods = new ObservableCollection<string>();
+
+            foreach (var method in paymentMethodsArr)
+            {
+                paymentMethods.Add((string)method.UserPaymentMethodName);
+            }
+
+
+            getPaymentMethods.ItemsSource = paymentMethods;
+
 
         }
 
         async void LinkBankBeneficiary_Button_Pressed(System.Object sender, System.EventArgs e)
         {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                linkBankBeneficiary.Text = "Please sign in first.";
+                return;
+            }
 
             dynamic linkBankBeneficiaryData = await LinkBankBeneficiary();
 
@@ -122,6 +194,21 @@ namespace XTRM
 
         }
 
+        async void TransferFunds_Button_Pressed(System.Object sender, System.EventArgs e)
+        {
+            if (!Application.Current.Properties.ContainsKey("access_token"))
+            {
+                transferFunds.Text = "Please sign in first.";
+                return;
+            }
+
+            dynamic transferFundsData = await TransferFunds();
+
+            Console.WriteLine(transferFundsData.ToString());
+
+            transferFunds.Text = "Funds transfered.";
+
+        }
         public MainPage()
         {
 
@@ -368,7 +455,7 @@ namespace XTRM
                 RecipientUserID = "PAT21138510",
             };
             var getLinkedBankAccountsObj = new { request = requestObj };
-            var outerObj = new { GetLinkedBankAccountsObj = getLinkedBankAccountsObj };
+            var outerObj = new { GetLinkedBankAccounts = getLinkedBankAccountsObj };
 
             var json = JsonConvert.SerializeObject(outerObj);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -526,7 +613,22 @@ namespace XTRM
             };
 
 
-            var outerObj = new { };
+            var requestObj = new
+            {
+                IssuerAccountNumber = "SPN1234567",
+                PaymentType = "Credits",
+                PaymentMethodID = "Use API",
+                ProgramID = "2314",
+                WalletID = "289112",
+                PaymentDescription = "commodo magna amet dolore",
+                PaymentCurrency = "VUV",
+                EmailNotification = true,
+                TransactionDetails = transactionDetailsArr
+            };
+
+            var transferFundObj = new { request = requestObj };
+
+            var outerObj = new { TransferFund = transferFundObj };
 
             var json = JsonConvert.SerializeObject(outerObj);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
