@@ -775,13 +775,13 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
-        global $wallet_currency;
-        global $endpoint;
+        global $wallet_id;
         global $currency_code;
+        global $endpoint;
 
         $payment_method_id = filter_input(INPUT_POST,'payment_method_id');
         $amount = filter_input(INPUT_POST,'amount');
-        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        $company_wallet_id = $wallet_id;
         $email_notification = filter_input(INPUT_POST,'email_notification');
         $linked_bank = filter_input(INPUT_POST,'bank_id');
         

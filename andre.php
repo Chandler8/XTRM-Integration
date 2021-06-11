@@ -187,8 +187,8 @@
                         </div>
                     </div>
                 </form>
-        <!------------getUserWallet--------------------------------------------------------------------------------------------------------------------->
-                <form id="get-user-wallet-form" class="d-none" action="scripts/XTRM.php" method="POST">
+        <!------------getUserWallets--------------------------------------------------------------------------------------------------------------------->
+                <form id="get-user-wallets-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group find-user col-6">
                             <label for="u_id">User ID</label>
@@ -234,6 +234,39 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------getUserWalletTransactions------------------------------------------------------------------------------------------------------------>
+                <form id="get-user-wallet-transactions-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="user_id">User ID</label>
+                            <input type="text" class="form-control" id="wallet_id" name="wallet_id" placeholder="Enter the wallet ID">
+                        </div>
+                        <div class="form-group user-group find-user col-4">
+                            <label for="currency_type">Select currency type</label>
+                            <select class="custom-select" name="wallet_currency" id="currency_type">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------getCompanyWalletTransactionDetails------------------------------------------------------------------------------------------------------------>
+                <form id="get-company-wallet-transaction-details-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="transaction_id">Wallet ID</label>
+                            <input type="text" class="form-control" id="transcation_id" name="transaction_id" placeholder="Enter the transaction ID">
+                        </div>
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
                             <button type="submit" class="btn btn-success">Submit</button>
