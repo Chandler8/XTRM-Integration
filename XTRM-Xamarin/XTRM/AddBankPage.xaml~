@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="XTRM.AddBankPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="15" Margin="20" x:Name="BankForm" IsVisible="false" >
+            <Entry x:Name="firstName" Placeholder="First Name" />
+            <Entry x:Name="lastName" Placeholder="Last Name" />
+            <Entry x:Name="phoneNumber" Placeholder="Phone #" />
+            <Entry x:Name="addressLineOne" Placeholder="Address Line 1" />
+            <Entry x:Name="addressLineTwo" Placeholder="Address Line 2" />
+            <Entry x:Name="city" Placeholder="City" />
+            <Entry x:Name="state" Placeholder="State" />
+            <Entry x:Name="zipCode" Placeholder="Zip Code" />
+            <Entry x:Name="country" Placeholder="Country" />
+            <Label Text="Bank Info" />
+            <Entry x:Name="bankName" Placeholder="Bank Name" />
+            <Entry x:Name="bankAccountNumber" Placeholder="Account Number" />
+            <Entry x:Name="bankAccountNumberConfirm" Placeholder="Confirm Account Number" />
+            <Entry x:Name="bankRoutingNumber" Placeholder="Routing Number" />
+
+
+            <!--<Button Text="Submit Bank" HorizontalOptions="End" Padding="8" BackgroundColor="Green" TextColor="White" Pressed="SubmitBank_Button_Pressed"/>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

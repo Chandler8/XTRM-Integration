@@ -18,12 +18,18 @@ namespace XTRM
 
     public partial class MainPage : ContentPage
     {
+        public MainPage()
+        {
 
+            InitializeComponent();
+
+        }
 
 
         async void To_Payments_Button_Pressed(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new PaymentsPage());
+            var setBankVerification = false;
+            await Navigation.PushAsync(new PaymentsPage(setBankVerification));
         }
 
         async void Auth_Button_Pressed(System.Object sender, System.EventArgs e)
@@ -209,12 +215,7 @@ namespace XTRM
             transferFunds.Text = "Funds transfered.";
 
         }
-        public MainPage()
-        {
 
-            InitializeComponent();
-
-        }
 
 
         public static async Task<object> getAuthToken()
@@ -269,6 +270,7 @@ namespace XTRM
             var data = await response.Content.ReadAsStringAsync();
 
             var token = JsonConvert.DeserializeObject<object>(data);
+
 
             return token;
         }
@@ -587,9 +589,6 @@ namespace XTRM
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-
-
 
             var transactionDetailsObj = new
             {

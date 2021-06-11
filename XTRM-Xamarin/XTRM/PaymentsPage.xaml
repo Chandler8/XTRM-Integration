@@ -2,46 +2,58 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="XTRM.PaymentsPage" Title="Payments">
-
-    <StackLayout>
-        <Label Text="Payment Schedule" FontSize="Title" HorizontalOptions="Center" Margin="0, 10, 0, 0"/>
-        <Label HorizontalOptions="Center" x:Name="walletBalance" FontSize="Large" Padding="10" />
-        <FlexLayout Direction="Row"
+    x:Class="XTRM.PaymentsPage">
+    <ContentPage.Content>
+        <ScrollView x:Name="scroll">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="Payment Schedule" FontSize="Title" HorizontalOptions="Center" Margin="0, 10, 0, 0"/>
+                <Label HorizontalOptions="Center" x:Name="walletBalance" FontSize="Large" Padding="10" Text="Wallet Balance:" />
+                <FlexLayout Direction="Row"
                 AlignItems="Center"
                 JustifyContent="SpaceEvenly">
-            <Label Text="Payment options:"/>
-            <Button Text="Bank ACH" HorizontalOptions="End" Padding="8" BackgroundColor="Green" TextColor="White" Pressed="BankACH_Button_Pressed"/>
-            <Button Text="Debit Card" HorizontalOptions="End" Padding="8" BackgroundColor="Green" TextColor="White"/>
-            <Button Text="Gift Card" HorizontalOptions="End" Padding="8" BackgroundColor="Green" TextColor="White"/>
-        </FlexLayout>
-        <StackLayout Spacing="15" Margin="20" x:Name="BankForm" IsVisible="false" >
-            <Entry Placeholder="First Name" />
-            <Entry Placeholder="Last Name" />
-            <Entry Placeholder="Phone #" />
-            <Entry Placeholder="Address Line 1" />
-            <Entry Placeholder="Address Line 2" />
-            <Entry Placeholder="City" />
-            <Entry Placeholder="State" />
-            <Entry Placeholder="Zip Code" />
-            <Entry Placeholder="Country" />
-            <Label Text="Bank Info" />
-            <Entry Placeholder="Account Number" />
-            <Entry Placeholder="Confirm Account Number" />
-            <Entry Placeholder="Routing Number" />
-            <Entry Placeholder="Account Nickname" />
-            <Picker />
-        </StackLayout>
+                    <Label Text="Payment options:"/>
+                    <Button Text="Bank" x:Name="BankButton" HorizontalOptions="End" Padding="8" BackgroundColor="#879114" TextColor="White" WidthRequest="90" FontSize="14" FontAttributes="Bold" Pressed="Bank_Button_Pressed" />
+                    <Button Text="Debit Card" HorizontalOptions="End" Padding="8" BackgroundColor="#879114" TextColor="White" WidthRequest="90" FontSize="14" FontAttributes="Bold"/>
+                    <Button Text="Gift Card" HorizontalOptions="End" Padding="8" BackgroundColor="#879114" TextColor="White" WidthRequest="90" FontSize="14" FontAttributes="Bold"/>
+                </FlexLayout>
+                <StackLayout Padding="10" BackgroundColor="#e8e8e8" IsVisible="False" x:Name="transferForm">
+                    <Line />
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="bankName" Text="Wells Fargo" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold" />
+                        <Label Text="Account #: ...2653" Grid.Row="1" Grid.Column="0"/>
+                        <Button Text="Edit" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" HorizontalOptions="End" Padding="8" BackgroundColor="#879114" TextColor="White" WidthRequest="90" HeightRequest="40" VerticalOptions="Center"/>
 
-        <Frame  BackgroundColor="Blue"
+                    </Grid>
+                    <BoxView Color="Gray" HeightRequest="1" />
+                    <Grid HorizontalOptions="FillAndExpand">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="Transfer:"  HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" FontAttributes="Bold"  FontSize="18"/>
+                        <Entry Keyboard="Numeric" Placeholder="0.00"  HorizontalOptions="FillAndExpand" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="End"/>
+
+                        <Button Text="Submit" x:Name="transferFunds" Grid.Row="0" Grid.Column="3" HorizontalOptions="End" Padding="8" BackgroundColor="#879114" TextColor="White" WidthRequest="90" HeightRequest="40" Pressed="TransferFunds_Button_Pressed"/>
+                    </Grid>
+                </StackLayout>
+
+                <Frame  BackgroundColor="Blue"
                                  HeightRequest="600"
                                  WidthRequest="32"
                                  VerticalOptions="Center" >
-            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Payment Schedule" TextColor="White" FontSize="Large"/>
-        </Frame>
-
-    </StackLayout>
-
-
-
+                    <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Payment Schedule" TextColor="White" FontSize="Large"/>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
