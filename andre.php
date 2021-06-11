@@ -30,6 +30,7 @@
                     <label class="form-check-label" for="beneficiary-options">View Beneficiary Options</label>
                 </div>
             </div>
+    <!---------------Option Types---------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="option-types">
                 <div class="company-options-btns d-none">
                     <div class="row">
@@ -80,6 +81,7 @@
             </div>
             <hr>
             <div class="container">
+        <!---------------createUser---------------------------------------------------------------------------------------------------------------------------------------------->
                 <form id="create-user-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group col-6">
@@ -156,7 +158,36 @@
                         </div>
                     </div>
                 </form>
-        <!--------------------------------------------------------------------------------------------------------------------------------->
+        <!---------------------createUserWallet------------------------------------------------------------------------------------------------------------>
+                <form id="create-user-wallet-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group col-8">
+                            <label for="wallet_name">Wallet name</label>
+                            <input type="text" class="form-control" id="wallet_name" name="wallet_name" placeholder="Enter a name for this wallet, Ex:(Ruples)">
+                        </div>
+                        <div class="form-group user-group find-user col-2">
+                            <label for="wallet_type">Select wallet type</label>
+                            <select class="custom-select" name="wallet_type" id="wallet_type">
+                                <option value="standard">Standard</option>
+                                <option value="non-standard">Non-standard</option>
+                            </select>
+                        </div>
+                        <div class="form-group user-group find-user col-2">
+                            <label for="currency_type">Select currency type</label>
+                            <select class="custom-select" name="wallet_currency" id="currency_type">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!------------getUserWallet--------------------------------------------------------------------------------------------------------------------->
                 <form id="get-user-wallet-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group find-user col-6">
@@ -209,7 +240,7 @@
                         </div>
                     </div>
                 </form>
-        <!--------------------------------------------------------------------------------------------------------------------------------->
+        <!------------updateUser--------------------------------------------------------------------------------------------------------------------->
                 <form id="update-user-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group col-4">
@@ -290,7 +321,7 @@
                         </div>
                     </div>
                 </form>
-        <!--------------------------------------------------------------------------------------------------------------------------------->
+        <!--------------linkBeneficiaryBank------------------------------------------------------------------------------------------------------------------->
                 <form id="link-beneficiary-bank-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group col-4">
@@ -389,7 +420,7 @@
                         </div>
                     </div>
                 </form>
-        <!--------------------------------------------------------------------------------------------------------------------------------->
+        <!---------------------transferFundDynamicAccountCreateUser------------------------------------------------------------------------------------------------------------>
                 <form id="transfer-dynamic-create-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group col-3">
@@ -429,6 +460,140 @@
                         </div>
                     </div>
                 </form>
+        <!---------------------createCompanyWallet------------------------------------------------------------------------------------------------------------>
+                <form id="create-company-wallet-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group col-8">
+                            <label for="wallet_name">Wallet name</label>
+                            <input type="text" class="form-control" id="wallet_name" name="wallet_name" placeholder="Enter a name for this wallet, Ex:(Sweden Trip)">
+                        </div>
+                        <div class="form-group user-group find-user col-2">
+                            <label for="wallet_type">Select wallet type</label>
+                            <select class="custom-select" name="wallet_type" id="wallet_type">
+                                <option value="standard">Standard</option>
+                                <option value="non-standard">Non-standard</option>
+                            </select>
+                        </div>
+                        <div class="form-group user-group find-user col-2">
+                            <label for="currency_type">Select currency type</label>
+                            <select class="custom-select" name="wallet_currency" id="currency_type">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------updateCompanyWallet------------------------------------------------------------------------------------------------------------>
+                <form id="update-company-wallet-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group col-8">
+                            <label for="wallet_id">Wallet ID</label>
+                            <input type="text" class="form-control" id="wallet_id" name="wallet_id" placeholder="Enter the wallet ID">
+                        </div>
+                        <div class="form-group user-group col-8">
+                            <label for="update_wallet_name">Update wallet name</label>
+                            <input type="text" class="form-control" id="update_wallet_name" name="wallet_name" placeholder="Enter the new wallet name, Ex:(Finland Trip)">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------getCompanyWalletTransactions------------------------------------------------------------------------------------------------------------>
+                <form id="get-company-wallet-transactions-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="wallet_id">Wallet ID</label>
+                            <input type="text" class="form-control" id="wallet_id" name="wallet_id" placeholder="Enter the wallet ID">
+                        </div>
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------getCompanyWalletTransactionDetails------------------------------------------------------------------------------------------------------------>
+                <form id="get-company-wallet-transaction-details-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="transaction_id">Wallet ID</label>
+                            <input type="text" class="form-control" id="transcation_id" name="transaction_id" placeholder="Enter the transaction ID">
+                        </div>
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------transferFund------------------------------------------------------------------------------------------------------------>
+                <form id="transfer-fund-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="wallet_id">Wallet ID</label>
+                            <input type="text" class="form-control" id="wallet_id" name="wallet_id" placeholder="Enter the wallet ID">
+                        </div>
+                    </div>
+                    <div class="form-group user-group find-user col-2">
+                        <label for="currency_type">Select currency type</label>
+                        <select class="custom-select" name="wallet_currency" id="currency_type">
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                    </div>
+                    <div class="form-group user-group col-4">
+                        <label for="user_id">User ID</label>
+                        <input type="text" class="form-control" id="user_id" name="u_id" placeholder="Enter the user's ID">
+                    </div>
+                    <div class="form-group user-group col-2">
+                        <label for="amount">Amount</label>
+                        <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter amount to transfer, Ex: 235.67">
+                    </div>
+                    <div class="form-group form-check user-group">
+                        <input type="checkbox" class="form-check-input" id="notify">
+                        <label class="form-check-label" for="notify">Check to be notified by email</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------checkBeneficiaryExist------------------------------------------------------------------------------------------------------------>
+                <form id="check-beneficiary-exist-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="company_name">Company Name</label>
+                            <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Enter the company name">
+                        </div>
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------checkUserExist------------------------------------------------------------------------------------------------------------>
+                <form id="check-user-exist-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="user_email">Email</label>
+                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Enter the user's email">
+                        </div>
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </body>
@@ -436,4 +601,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="scripts/myscript.js"></script>
-</html>
+</html>    
