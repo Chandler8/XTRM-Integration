@@ -407,9 +407,10 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
+        global $wallet_id;
         global $endpoint;
 
-        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        $company_wallet_id = $wallet_id;
         
         $curl = curl_init();
 
@@ -594,7 +595,7 @@
         $json_typed = json_encode($request_fields);
         
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactionsByRemitter',
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/fundCompanyWalletUsingCreditCard',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -1441,9 +1442,10 @@
         global $I_A_N;
         global $u_id;
         global $R_A_N;
+        global $wallet_currency;
         global $endpoint;
         
-        $user_wallet_currency = filter_input(INPUT_POST,'user_wallet_currency');
+        $user_wallet_currency = $wallet_currency;
         
         $curl = curl_init();
 
@@ -1453,7 +1455,7 @@
                     "IssuerAccountNumber"=>$I_A_N,
                     "UserID"=>$u_id,
                     "RemitterAccountNo"=>$R_A_N,
-                    "WalletCurrency"=>"USD",
+                    "WalletCurrency"=>$user_wallet_currency,
                     "Pagination"=>[
                         "RecordsToSkip"=>"1",
                         "RecordsToTake"=>"10"
@@ -1632,11 +1634,10 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
-        global $R_A_N;
         global $endpoint;
         global $u_id;
 
-        $bank_id = filter_input(INPUT_POST,'linked_bank');
+        $bank_id = filter_input(INPUT_POST,'bank_id');
         
         $curl = curl_init();
 
@@ -1851,7 +1852,7 @@
 
 
     //Use this function to update a beneficiary user's wallet
-    function upateUserWallet()
+    function updateUserWallet()
     {
         $token = refreshAuthToken();
         
@@ -2335,11 +2336,20 @@
     elseif(isset($_POST['submit']) == 'get_user_wallets'){
         getUserWallets();
     }
+    elseif(isset($_POST['submit']) == 'get_user_wallet_balance'){
+        getUserWalletBalance();
+    }
+    elseif(isset($_POST['submit']) == 'update_user_wallet'){
+        updateUserWallet();
+    }
     elseif(isset($_POST['submit']) == 'get_user_wallet_transactions'){
         getUserWalletTransactions();
     }
-    elseif(isset($_POST['submit']) == ''){
-
+    elseif(isset($_POST['submit']) == 'get_user_wallet_transactions_by_remitter'){
+        getUserWalletTransactionsByRemitter();
+    }
+    elseif(isset($_POST['submit']) == 'get_user_wallet_transaction_details'){
+        getUserWalletTransactionDetails();
     }
     elseif(isset($_POST['submit']) == 'update_user'){
         updateUser();
@@ -2347,8 +2357,17 @@
     elseif(isset($_POST['submit']) == 'link_beneficiary_bank'){
         linkBankBeneficiary();
     }
+    elseif(isset($_POST['submit']) == 'get_linked_bank_accounts'){
+        getLinkedBankAccounts();
+    }
+    elseif(isset($_POST['submit']) == 'delete_bank_beneficiary'){
+        deleteBankBeneficiary();
+    }
     elseif(isset($_POST['submit']) == 'create_company_wallet'){
         createCompanyWallet();
+    }
+    elseif(isset($_POST['submit']) == 'get_company_wallets'){
+        getCompanyWallets();
     }
     elseif(isset($_POST['submit']) == 'update_company_wallet'){
         updateCompanyWallet();
@@ -2362,11 +2381,29 @@
     elseif(isset($_POST['submit']) == 'transfer_fund'){
         transferFund();
     }
+    elseif(isset($_POST['submit']) == 'transfer_dynamic_create'){
+        transferFundDynamicAccountCreateUser();
+    }
     elseif(isset($_POST['submit']) == 'check_beneficiary_exist'){
         checkBeneficiaryExist();
     }
     elseif(isset($_POST['submit']) == 'check_user_exist'){
         checkUserExist();
+    }
+    elseif(isset($_POST['submit']) == 'get_payment_methods'){
+        getPaymentMethods();
+    }
+    elseif(isset($_POST['submit']) == 'get_user_payment_methods'){
+        getUserPaymentMethods();
+    }
+    elseif(isset($_POST['submit']) == 'get_beneficiaries'){
+        getBeneficiaries();
+    }
+    elseif(isset($_POST['submit']) == 'get_digital_gift_cards'){
+        getDigitalGiftCards();
+    }
+    elseif(isset($_POST['submit']) == 'search_bank'){
+        searchBank();
     }
     else{
         echo "<h2>That call is not yet setup.</h2>";
