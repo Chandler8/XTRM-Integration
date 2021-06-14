@@ -35,46 +35,47 @@
                 <div class="company-options-btns d-none">
                     <div class="row">
                         <div class="col">
-                            <div class="btn btn-success btn-sm">Create Company Wallet</div>
-                            <div class="btn btn-success btn-sm">Get Compny Wallets</div>
-                            <div class="btn btn-success btn-sm">Fund Wallet Using ACH Debit</div>
-                            <div class="btn btn-success btn-sm">Update Company Wallet</div>
-                            <div class="btn btn-success btn-sm">Get Company Wallet Transactions</div>
+                            <div class="btn btn-success btn-sm" id="create_company_wallet_option_btn">Create Company Wallet</div>
+                            <div class="btn btn-success btn-sm" id="get_company_wallets_option_btn">Get Compny Wallets</div>
+                            <div class="btn btn-success btn-sm" id="fund_wallet_using_ACH_Debit_option_btn">Fund Wallet Using ACH Debit</div>
+                            <div class="btn btn-success btn-sm" id="update_company_wallet_option_btn">Update Company Wallet</div>
+                            <div class="btn btn-success btn-sm" id="get_company_wallet_transactions_option_btn">Get Company Wallet Transactions</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="btn btn-success btn-sm">Get Payment Methods</div>
-                            <div class="btn btn-success btn-sm">Check Beneficiary Exists</div>
-                            <div class="btn btn-success btn-sm">Get Beneficiaruy Wallets</div>
-                            <div class="btn btn-success btn-sm">Transfer Fund</div>
-                            <div class="btn btn-success btn-sm">Transfer Fund / Create User</div>
-                            <div class="btn btn-success btn-sm">Get Company Wallet Transaction Details</div>
+                            <div class="btn btn-success btn-sm" id="get_payment_methods_option_btn">Get Payment Methods</div>
+                            <div class="btn btn-success btn-sm" id="check_beneficiary_exists_option_btn">Check Beneficiary Exists</div>
+                            <div class="btn btn-success btn-sm" id="get_beneficiary_wallets_option_btn">Get Beneficiaruy Wallets</div>
+                            <div class="btn btn-success btn-sm" id="transfer_fund_option_btn">Transfer Fund</div>
+                            <div class="btn btn-success btn-sm" id="transfer_fund_create_user_option_btn">Transfer Fund / Create User</div>
+                            <div class="btn btn-success btn-sm" id="get_company_wallet_transaction_details_option_btn">Get Company Wallet Transaction Details</div>
                         </div>
                     </div>
                 </div>
                 <div class="beneficiary-options-btns d-none">
                     <div class="row">
                         <div class="col">
-                            <div class="btn btn-success btn-sm">Create User</div>
-                            <div class="btn btn-success btn-sm">Check User Exists</div>
-                            <div class="btn btn-success btn-sm">Create User Wallet</div>
-                            <div class="btn btn-success btn-sm">Get User Wallets</div>
-                            <div class="btn btn-success btn-sm">Get User Payment Methods</div>
-                            <div class="btn btn-success btn-sm">Get User Wallet Transactions</div>
-                            <div class="btn btn-success btn-sm">Get User Wallet Transactions By Remitter</div>
+                            <div class="btn btn-success btn-sm" id="create_user_option_btn">Create User</div>
+                            <div class="btn btn-success btn-sm" id="check_user_exists_option_btn">Check User Exists</div>
+                            <div class="btn btn-success btn-sm" id="create_user_wallet_option_btn">Create User Wallet</div>
+                            <div class="btn btn-success btn-sm" id="get_user_wallets_option_btn">Get User Wallets</div>
+                            <div class="btn btn-success btn-sm" id="get_user_payment_methods_option_btn">Get User Payment Methods</div>
+                            <div class="btn btn-success btn-sm" id="get_user_wallet_transactions_option_btn">Get User Wallet Transactions</div>
+                            <div class="btn btn-success btn-sm" id="get_user_wallet_transactions_by_remitter_option_btn">Get User Wallet Transactions By Remitter</div>
+                            <div class="btn btn-success btn-sm" id="get_digital_gift_cards_option_btn">Get Digital Gift Cards</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="btn btn-success btn-sm">Get User Wallet Transaction Details</div>
-                            <div class="btn btn-success btn-sm">Search Bank</div>
-                            <div class="btn btn-success btn-sm">Link Benefiacry Bank</div>
-                            <div class="btn btn-success btn-sm">Get Linked Bank Accounts</div>
-                            <div class="btn btn-success btn-sm">Delete Linked Bank Account</div>
-                            <div class="btn btn-success btn-sm">Update User</div>
-                            <div class="btn btn-success btn-sm">Update User Wallet</div>
-                            <div class="btn btn-success btn-sm">Get User Wallet Balance</div>
+                            <div class="btn btn-success btn-sm" id="get_user_wallet_transaction_details_option_btn">Get User Wallet Transaction Details</div>
+                            <div class="btn btn-success btn-sm" id="search_bank_option_btn">Search Bank</div>
+                            <div class="btn btn-success btn-sm" id="link_beneficiary_bank_option_btn">Link Benefiacry Bank</div>
+                            <div class="btn btn-success btn-sm" id="get_linked_bank_accounts_option_btn">Get Linked Bank Accounts</div>
+                            <div class="btn btn-success btn-sm" id="delete_beneficiary_linked_bank_option_btn">Delete Beneficiary Linked Bank</div>
+                            <div class="btn btn-success btn-sm" id="update_user_option_btn">Update User</div>
+                            <div class="btn btn-success btn-sm" id="update_user_wallet_option_btn">Update User Wallet</div>
+                            <div class="btn btn-success btn-sm" id="get_user_wallet_balance_option_btn">Get User Wallet Balance</div>
                         </div>
                     </div>
                 </div>

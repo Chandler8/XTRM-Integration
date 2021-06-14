@@ -2327,82 +2327,85 @@
  */
 
 
-    if(isset($_POST['submit']) == 'create_user'){
+
+    $submitted = filter_input(INPUT_POST,'submit');
+
+    if($submitted == 'create_user'){
         createUser();
     }
-    elseif(isset($_POST['submit']) == 'create_user_wallet'){
+    elseif($submitted == 'create_user_wallet'){
         createUserWallet();
     }
-    elseif(isset($_POST['submit']) == 'get_user_wallets'){
+    elseif($submitted == 'get_user_wallets'){
         getUserWallets();
     }
-    elseif(isset($_POST['submit']) == 'get_user_wallet_balance'){
+    elseif($submitted == 'get_user_wallet_balance'){
         getUserWalletBalance();
     }
-    elseif(isset($_POST['submit']) == 'update_user_wallet'){
+    elseif($submitted == 'update_user_wallet'){
         updateUserWallet();
     }
-    elseif(isset($_POST['submit']) == 'get_user_wallet_transactions'){
+    elseif($submitted == 'get_user_wallet_transactions'){
         getUserWalletTransactions();
     }
-    elseif(isset($_POST['submit']) == 'get_user_wallet_transactions_by_remitter'){
+    elseif($submitted == 'get_user_wallet_transactions_by_remitter'){
         getUserWalletTransactionsByRemitter();
     }
-    elseif(isset($_POST['submit']) == 'get_user_wallet_transaction_details'){
+    elseif($submitted == 'get_user_wallet_transaction_details'){
         getUserWalletTransactionDetails();
     }
-    elseif(isset($_POST['submit']) == 'update_user'){
+    elseif($submitted == 'update_user'){
         updateUser();
     }
-    elseif(isset($_POST['submit']) == 'link_beneficiary_bank'){
+    elseif($submitted == 'link_beneficiary_bank'){
         linkBankBeneficiary();
     }
-    elseif(isset($_POST['submit']) == 'get_linked_bank_accounts'){
+    elseif($submitted == 'get_linked_bank_accounts'){
         getLinkedBankAccounts();
     }
-    elseif(isset($_POST['submit']) == 'delete_bank_beneficiary'){
+    elseif($submitted == 'delete_bank_beneficiary'){
         deleteBankBeneficiary();
     }
-    elseif(isset($_POST['submit']) == 'create_company_wallet'){
+    elseif($submitted == 'create_company_wallet'){
         createCompanyWallet();
     }
-    elseif(isset($_POST['submit']) == 'get_company_wallets'){
+    elseif($submitted === 'get_company_wallets'){
         getCompanyWallets();
     }
-    elseif(isset($_POST['submit']) == 'update_company_wallet'){
+    elseif($submitted == 'update_company_wallet'){
         updateCompanyWallet();
     }
-    elseif(isset($_POST['submit']) == 'get_company_wallet_transactions'){
+    elseif($submitted == 'get_company_wallet_transactions'){
         getCompanyWalletTransactions();
     }
-    elseif(isset($_POST['submit']) == 'get_company_wallet_transaction_details'){
+    elseif($submitted == 'get_company_wallet_transaction_details'){
         getCompanyWalletTransactionDetails();
     }
-    elseif(isset($_POST['submit']) == 'transfer_fund'){
+    elseif($submitted == 'transfer_fund'){
         transferFund();
     }
-    elseif(isset($_POST['submit']) == 'transfer_dynamic_create'){
+    elseif($submitted == 'transfer_dynamic_create'){
         transferFundDynamicAccountCreateUser();
     }
-    elseif(isset($_POST['submit']) == 'check_beneficiary_exist'){
+    elseif($submitted == 'check_beneficiary_exist'){
         checkBeneficiaryExist();
     }
-    elseif(isset($_POST['submit']) == 'check_user_exist'){
+    elseif($submitted == 'check_user_exist'){
         checkUserExist();
     }
-    elseif(isset($_POST['submit']) == 'get_payment_methods'){
+    elseif($submitted == 'get_payment_methods'){
         getPaymentMethods();
     }
-    elseif(isset($_POST['submit']) == 'get_user_payment_methods'){
+    elseif($submitted == "get_user_payment_methods"){
         getUserPaymentMethods();
     }
-    elseif(isset($_POST['submit']) == 'get_beneficiaries'){
+    elseif($submitted == 'get_beneficiaries'){
         getBeneficiaries();
     }
-    elseif(isset($_POST['submit']) == 'get_digital_gift_cards'){
+    elseif($submitted == 'get_digital_gift_cards'){
         getDigitalGiftCards();
     }
-    elseif(isset($_POST['submit']) == 'search_bank'){
+    elseif($submitted == 'search_bank'){
         searchBank();
     }
     else{
