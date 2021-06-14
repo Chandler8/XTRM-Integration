@@ -81,7 +81,7 @@
             </div>
             <hr>
             <div class="container">
-        <!---------------createUser---------------------------------------------------------------------------------------------------------------------------------------------->
+        <!--------------------createUser----------------------------------------------------------------------------------------------------------------------------------------->
                 <form id="create-user-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group col-6">
@@ -154,7 +154,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="create_user">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -183,12 +183,12 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="create_user_wallet">Submit</button>
                         </div>
                     </div>
                 </form>
-        <!------------getUserWallet--------------------------------------------------------------------------------------------------------------------->
-                <form id="get-user-wallet-form" class="d-none" action="scripts/XTRM.php" method="POST">
+        <!----------------------getUserWallets------------------------------------------------------------------------------------------------------------->
+                <form id="get-user-wallets-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group find-user col-6">
                             <label for="u_id">User ID</label>
@@ -236,7 +236,27 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="get_user_wallets">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        <!---------------------getUserWalletTransactions------------------------------------------------------------------------------------------------------------>
+                <form id="get-user-wallet-transactions-form" class="d-none" action="scripts/XTRM.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group user-group">
+                            <label for="user_id">User ID</label>
+                            <input type="text" class="form-control" id="wallet_id" name="wallet_id" placeholder="Enter the wallet ID">
+                        </div>
+                        <div class="form-group user-group find-user col-4">
+                            <label for="currency_type">Select currency type</label>
+                            <select class="custom-select" name="wallet_currency" id="currency_type">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="get_user_wallet_transactions">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -317,11 +337,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="update_user">Submit</button>
                         </div>
                     </div>
                 </form>
-        <!--------------linkBeneficiaryBank------------------------------------------------------------------------------------------------------------------->
+        <!-----------------------linkBeneficiaryBank-------------------------------------------------------------------------------------------------------------------------->
                 <form id="link-beneficiary-bank-form" class="d-none" action="scripts/XTRM.php" method="POST">
                     <div class="form-row">
                         <div class="form-group user-group col-4">
@@ -416,7 +436,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="link_beneficiary_bank">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -456,7 +476,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="transfer_dynamic_create">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -485,7 +505,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="create_company_wallet">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -504,7 +524,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="update_company_wallet">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -517,7 +537,7 @@
                         </div>
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="get_company_wallet_transactions">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -530,7 +550,7 @@
                         </div>
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="get_company_wallet_transaction_details">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -564,7 +584,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="transfer_fund">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -577,7 +597,7 @@
                         </div>
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="check_beneficiary_exist">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -590,7 +610,7 @@
                         </div>
                         <div class="form-group">
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" name="submit" value="check_user_exist">Submit</button>
                         </div>
                     </div>
                 </form>

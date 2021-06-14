@@ -775,13 +775,13 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
-        global $wallet_currency;
-        global $endpoint;
+        global $wallet_id;
         global $currency_code;
+        global $endpoint;
 
         $payment_method_id = filter_input(INPUT_POST,'payment_method_id');
         $amount = filter_input(INPUT_POST,'amount');
-        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        $company_wallet_id = $wallet_id;
         $email_notification = filter_input(INPUT_POST,'email_notification');
         $linked_bank = filter_input(INPUT_POST,'bank_id');
         
@@ -2316,4 +2316,58 @@
                 }
             }
         }
+    }
+
+/*****************************************************************************************************************************************************************************************************/
+
+/**
+ * Name: Andre Burte
+ * Section: Function call hanlders
+ */
+
+
+    if(isset($_POST['submit']) == 'create_user'){
+        createUser();
+    }
+    elseif(isset($_POST['submit']) == 'create_user_wallet'){
+        createUserWallet();
+    }
+    elseif(isset($_POST['submit']) == 'get_user_wallets'){
+        getUserWallets();
+    }
+    elseif(isset($_POST['submit']) == 'get_user_wallet_transactions'){
+        getUserWalletTransactions();
+    }
+    elseif(isset($_POST['submit']) == ''){
+
+    }
+    elseif(isset($_POST['submit']) == 'update_user'){
+        updateUser();
+    }
+    elseif(isset($_POST['submit']) == 'link_beneficiary_bank'){
+        linkBankBeneficiary();
+    }
+    elseif(isset($_POST['submit']) == 'create_company_wallet'){
+        createCompanyWallet();
+    }
+    elseif(isset($_POST['submit']) == 'update_company_wallet'){
+        updateCompanyWallet();
+    }
+    elseif(isset($_POST['submit']) == 'get_company_wallet_transactions'){
+        getCompanyWalletTransactions();
+    }
+    elseif(isset($_POST['submit']) == 'get_company_wallet_transaction_details'){
+        getCompanyWalletTransactionDetails();
+    }
+    elseif(isset($_POST['submit']) == 'transfer_fund'){
+        transferFund();
+    }
+    elseif(isset($_POST['submit']) == 'check_beneficiary_exist'){
+        checkBeneficiaryExist();
+    }
+    elseif(isset($_POST['submit']) == 'check_user_exist'){
+        checkUserExist();
+    }
+    else{
+        echo "<h2>That call is not yet setup.</h2>";
     }
