@@ -2302,7 +2302,12 @@
                                     //echo $items." = ".$parts."<br><br>";
                                     
                                     foreach($parts as $part=>$pieces){
-                                        echo "&emsp;".$part." = ".$pieces."<br>&emsp;&emsp;";
+                                        if($part == "Img80W"){
+                                            echo "&emsp;".$part." = <img src='".$pieces."'/><br>&emsp;&emsp;";
+                                        }
+                                        else{
+                                            echo "&emsp;".$part." = ".$pieces."<br>&emsp;&emsp;";
+                                        }
 
                                         foreach($pieces as $piece=>$item){
                                             echo $item.", ";
