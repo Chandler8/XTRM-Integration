@@ -13,6 +13,7 @@
     $I_A_N = "SPN19135579";
     $A_A_N = "";
     $R_A_N = "";
+    $P_A_N = "SPN18130652";
 
     //User info
     $u_id = filter_input(INPUT_POST,'user_id');
@@ -40,7 +41,14 @@
     $wallet_type = filter_input(INPUT_POST,'wallet_type');
     $currency_code = filter_input(INPUT_POST,'currency_code');
     $transaction_id = filter_input(INPUT_POST,'transaction_id');
-    
+
+    //Use these for bank testing/
+    $bank_name = "Wells Fargo"; //filter_input(INPUT_POST,'bank_name');
+    $bank_account_number = filter_input(INPUT_POST,'$ba_number');
+    $bank_routing_number = "143906"; //filter_input(INPUT_POST,'routing_number');
+
+
+
     /**
      * From Nathan at XTRM:
      * Use the information below for testing bank calls.
@@ -50,9 +58,18 @@
      * Any account number
      */
 
-    $bank_name = "Wells Fargo"; //filter_input(INPUT_POST,'bank_name');
-    $bank_account_number = filter_input(INPUT_POST,'$ba_number');
-    $bank_routing_number = "143906"; //filter_input(INPUT_POST,'routing_number');
+     /**
+     * From Nathan at XTRM:
+     * Use the information below for testing with an Ultimate Remitter.
+     * 
+     * Company name: Acme 2
+     * Account Number:	SPN18130652
+     * API End Point:	http://sandbox.xapi.xtrm.com/API/V4/
+     * Client ID:	2030930_API_User
+     * Secret Key:	7U3Es2JE/RXPuQCh118Lru9hpFutz/cYWe1H7RQka4c=
+     */
+
+
 
 /***************************************************************************************************************************************************************************************************/
 
@@ -208,6 +225,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Created company wallet</h1>";
             foreach($resp as $resps){
                 foreach($resps as $wallet){
                     echo $wallet." = ".$part."<br>";
@@ -264,6 +282,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Company Wallets</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -336,6 +355,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Updated company wallet</h1>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $wallet=>$part){
@@ -382,6 +402,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Payment Methods</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -455,6 +476,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Company Wallet Transactions</h1>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -515,8 +537,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
+            echo "<h1>Company Wallet Transaction Details</h1>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
@@ -620,6 +641,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Funded company wallet using credit card</h1>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $details=>$part){
@@ -688,6 +710,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Funded wallet using ACH debit</h1>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $details=>$part){
@@ -750,6 +773,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiaries</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -776,6 +800,7 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
+        global $P_A_N;
         global $wallet_id;
         global $currency_code;
         global $endpoint;
@@ -785,6 +810,7 @@
         $company_wallet_id = $wallet_id;
         $email_notification = filter_input(INPUT_POST,'email_notification');
         $linked_bank = filter_input(INPUT_POST,'bank_id');
+        $payment_description = filter_input(INPUT_POST,'payment_description');
         
         $curl = curl_init();
 
@@ -797,13 +823,13 @@
                         "PaymentMethodId"=>$payment_method_id,
                         "ProgramId"=>"Use 'GetPrograms' to get Program ID",
                         "WalletID"=>$company_wallet_id,
-                        "PaymentDescription"=>"Payment Description",
+                        "PaymentDescription"=>$payment_description,
                         "PaymentCurrency"=>$currency_code,
                         "EmailNotification"=>$email_notification,        
                         "TransactionDetails"=>[
                             "IssuerTransactionId"=>"Unique ID",
                             "PaymentAmount"=>$amount,
-                            "PartnerAccountNumber"=>"SPN Account Number",
+                            "PartnerAccountNumber"=>$P_A_N,
                             "RecipientUserId"=>$u_id,
                             "UserLinkedBankID"=>$linked_bank,
                             "UserPayPalEmailID"=>"User PayPal Email ID",
@@ -846,6 +872,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Funds transferred</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -869,6 +896,7 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
+        global $P_A_N;
         global $wallet_id;
         global $currency_code;
         global $first_name;
@@ -885,7 +913,7 @@
             "TransferFundToDynamicAccountUser"=>[
                 "Request"=>[
                     "IssuerAccountNumber"=>$I_A_N,
-                    "FromAccountNumber"=>"SPN Issuer Account Number",
+                    "FromAccountNumber"=>$P_A_N,
                     "FromWalletID"=>$wallet_id,
                     "RecipientFirstName"=>$first_name, 
                     "RecipientLastName"=>$last_name,
@@ -925,6 +953,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User created after dynamic transfer</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -990,6 +1019,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiary exists</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1097,6 +1127,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User created</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1347,6 +1378,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Payment Methods</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1967,6 +1999,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiary Wallets</h1>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -2302,7 +2335,12 @@
                                     //echo $items." = ".$parts."<br><br>";
                                     
                                     foreach($parts as $part=>$pieces){
-                                        echo "&emsp;".$part." = ".$pieces."<br>&emsp;&emsp;";
+                                        if($part == "Img80W"){
+                                            echo "&emsp;".$part." = <img src='".$pieces."'/><br>&emsp;&emsp;";
+                                        }
+                                        else{
+                                            echo "&emsp;".$part." = ".$pieces."<br>&emsp;&emsp;";
+                                        }
 
                                         foreach($pieces as $piece=>$item){
                                             echo $item.", ";
