@@ -15,6 +15,8 @@
     $R_A_N = "";
     $P_A_N = "SPN18130652";
 
+    $go_home = "";
+
     //User info
     $u_id = filter_input(INPUT_POST,'user_id');
     $first_name = filter_input(INPUT_POST,'first_name');
@@ -23,6 +25,7 @@
     $email_notification = filter_input(INPUT_POST,'email_notification');
     $mobile_number = filter_input(INPUT_POST,'mobile_number');
     $taxID = filter_input(INPUT_POST,'$tax_id');
+    $dob = filter_input(INPUT_POST,'user_dob');
     $day = "";
     $month = "";
     $year = "";
@@ -221,11 +224,14 @@
         curl_close($curl);
 
         $resp = json_decode($response, true);
+        
+        global $go_home;
 
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Created company wallet</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $wallet){
                     echo $wallet." = ".$part."<br>";
@@ -279,10 +285,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Company Wallets</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -352,10 +361,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Updated company wallet</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $wallet=>$part){
@@ -399,10 +411,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Payment Methods</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -473,10 +488,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Company Wallet Transactions</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -534,10 +552,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Company Wallet Transaction Details</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
@@ -707,10 +728,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Funded wallet using ACH debit</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $details=>$part){
@@ -770,10 +794,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Beneficiaries</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -869,10 +896,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Funds transferred</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -950,10 +980,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User created after dynamic transfer</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1016,10 +1049,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Beneficiary exists</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1124,10 +1160,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User created</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1187,9 +1226,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User exists</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1262,6 +1305,8 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User wallet created</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1324,9 +1369,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallets</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1375,10 +1424,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Payment Methods</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1451,9 +1503,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Transactions</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -1521,9 +1577,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Transactions By Remitter</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -1583,9 +1643,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Transaction Details</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
@@ -1643,9 +1707,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Linked Bank Accounts</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $beneficiaries){
@@ -1708,9 +1776,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiary Bank Deleted</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $result=>$part){
@@ -1868,9 +1940,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User updated</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $result){
                     foreach($result as $user=>$part){
@@ -1935,9 +2011,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Updated</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $result){
                     foreach($result as $wallet=>$part){
@@ -1996,10 +2076,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Beneficiary Wallets</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -2064,9 +2147,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Balance</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -2133,9 +2220,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Banks</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $banks=>$bank){
@@ -2246,9 +2337,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Bank Linked</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -2321,9 +2416,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Digital Gift Cards</h1>";
+            echo "<a href='".$go_home."'>Return to API calls test page</a>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
