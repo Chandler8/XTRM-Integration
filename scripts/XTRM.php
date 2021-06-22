@@ -15,7 +15,7 @@
     $R_A_N = "";
     $P_A_N = "SPN18130652";
 
-    $go_home = "";
+    $go_home = "http://localhost/XTRM/XTRM-Integration/andre.php";
 
     //User info
     $u_id = filter_input(INPUT_POST,'user_id');
@@ -231,7 +231,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Created company wallet</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $wallet){
                     echo $wallet." = ".$part."<br>";
@@ -291,7 +291,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Company Wallets</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -367,7 +367,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Updated company wallet</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $wallet=>$part){
@@ -417,7 +417,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Payment Methods</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -494,7 +494,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Company Wallet Transactions</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -558,7 +558,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Company Wallet Transaction Details</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
@@ -734,7 +734,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Funded wallet using ACH debit</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $details=>$part){
@@ -800,7 +800,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Beneficiaries</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -902,7 +902,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Funds transferred</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -986,7 +986,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User created after dynamic transfer</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1055,7 +1055,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Beneficiary exists</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1166,7 +1166,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User created</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1232,7 +1232,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User exists</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1306,7 +1306,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User wallet created</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1375,7 +1375,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Wallets</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1430,7 +1430,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Payment Methods</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1509,7 +1509,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Wallet Transactions</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -1583,7 +1583,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Wallet Transactions By Remitter</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -1649,7 +1649,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Wallet Transaction Details</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
@@ -1713,7 +1713,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Linked Bank Accounts</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $beneficiaries){
@@ -1782,7 +1782,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Beneficiary Bank Deleted</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $result=>$part){
@@ -1946,7 +1946,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User updated</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $result){
                     foreach($result as $user=>$part){
@@ -2017,7 +2017,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Wallet Updated</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $result){
                     foreach($result as $wallet=>$part){
@@ -2082,7 +2082,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Beneficiary Wallets</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -2153,7 +2153,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>User Wallet Balance</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -2226,7 +2226,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Banks</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $banks=>$bank){
@@ -2343,7 +2343,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Bank Linked</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -2422,7 +2422,7 @@
             echo "cURL Error #:" . $err;
         } else {
             echo "<h1>Digital Gift Cards</h1>";
-            echo "<a href='".$go_home."'>Return to API calls test page</a>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
