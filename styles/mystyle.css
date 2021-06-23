@@ -86,5 +86,10 @@ select {
 }
 
 a {
+    color: blue;
     text-decoration: none;
+}
+
+.active {
+  background-color: yellowgreen !important;
 }

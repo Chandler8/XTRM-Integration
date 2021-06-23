@@ -13,6 +13,9 @@
     $I_A_N = "SPN19135579";
     $A_A_N = "";
     $R_A_N = "";
+    $P_A_N = "SPN18130652";
+
+    $go_home = "http://localhost/XTRM/XTRM-Integration/andre.php";
 
     //User info
     $u_id = filter_input(INPUT_POST,'user_id');
@@ -22,6 +25,7 @@
     $email_notification = filter_input(INPUT_POST,'email_notification');
     $mobile_number = filter_input(INPUT_POST,'mobile_number');
     $taxID = filter_input(INPUT_POST,'$tax_id');
+    $dob = filter_input(INPUT_POST,'user_dob');
     $day = "";
     $month = "";
     $year = "";
@@ -40,7 +44,14 @@
     $wallet_type = filter_input(INPUT_POST,'wallet_type');
     $currency_code = filter_input(INPUT_POST,'currency_code');
     $transaction_id = filter_input(INPUT_POST,'transaction_id');
-    
+
+    //Use these for bank testing/
+    $bank_name = "Wells Fargo"; //filter_input(INPUT_POST,'bank_name');
+    $bank_account_number = filter_input(INPUT_POST,'$ba_number');
+    $bank_routing_number = "143906"; //filter_input(INPUT_POST,'routing_number');
+
+
+
     /**
      * From Nathan at XTRM:
      * Use the information below for testing bank calls.
@@ -50,9 +61,18 @@
      * Any account number
      */
 
-    $bank_name = "Wells Fargo"; //filter_input(INPUT_POST,'bank_name');
-    $bank_account_number = filter_input(INPUT_POST,'$ba_number');
-    $bank_routing_number = "143906"; //filter_input(INPUT_POST,'routing_number');
+     /**
+     * From Nathan at XTRM:
+     * Use the information below for testing with an Ultimate Remitter.
+     * 
+     * Company name: Acme 2
+     * Account Number:	SPN18130652
+     * API End Point:	http://sandbox.xapi.xtrm.com/API/V4/
+     * Client ID:	2030930_API_User
+     * Secret Key:	7U3Es2JE/RXPuQCh118Lru9hpFutz/cYWe1H7RQka4c=
+     */
+
+
 
 /***************************************************************************************************************************************************************************************************/
 
@@ -204,10 +224,14 @@
         curl_close($curl);
 
         $resp = json_decode($response, true);
+        
+        global $go_home;
 
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Created company wallet</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $wallet){
                     echo $wallet." = ".$part."<br>";
@@ -261,9 +285,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Company Wallets</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -333,9 +361,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Updated company wallet</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $wallet=>$part){
@@ -379,9 +411,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Payment Methods</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -407,9 +443,10 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
+        global $wallet_id;
         global $endpoint;
 
-        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        $company_wallet_id = $wallet_id;
         
         $curl = curl_init();
 
@@ -451,9 +488,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Company Wallet Transactions</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -511,11 +552,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            //print_r($resp);
-            
+            echo "<h1>Company Wallet Transaction Details</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
@@ -594,7 +637,7 @@
         $json_typed = json_encode($request_fields);
         
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $endpoint.'/API/V4/Wallet/GetUserWalletTransactionsByRemitter',
+            CURLOPT_URL => $endpoint.'/API/V4/Wallet/fundCompanyWalletUsingCreditCard',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -619,6 +662,7 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Funded company wallet using credit card</h1>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $details=>$part){
@@ -684,9 +728,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Funded wallet using ACH debit</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $details=>$part){
@@ -746,9 +794,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiaries</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -775,15 +827,17 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
-        global $wallet_currency;
-        global $endpoint;
+        global $P_A_N;
+        global $wallet_id;
         global $currency_code;
+        global $endpoint;
 
         $payment_method_id = filter_input(INPUT_POST,'payment_method_id');
         $amount = filter_input(INPUT_POST,'amount');
-        $company_wallet_id = filter_input(INPUT_POST,'company_wallet_id');
+        $company_wallet_id = $wallet_id;
         $email_notification = filter_input(INPUT_POST,'email_notification');
         $linked_bank = filter_input(INPUT_POST,'bank_id');
+        $payment_description = filter_input(INPUT_POST,'payment_description');
         
         $curl = curl_init();
 
@@ -796,13 +850,13 @@
                         "PaymentMethodId"=>$payment_method_id,
                         "ProgramId"=>"Use 'GetPrograms' to get Program ID",
                         "WalletID"=>$company_wallet_id,
-                        "PaymentDescription"=>"Payment Description",
+                        "PaymentDescription"=>$payment_description,
                         "PaymentCurrency"=>$currency_code,
                         "EmailNotification"=>$email_notification,        
                         "TransactionDetails"=>[
                             "IssuerTransactionId"=>"Unique ID",
                             "PaymentAmount"=>$amount,
-                            "PartnerAccountNumber"=>"SPN Account Number",
+                            "PartnerAccountNumber"=>$P_A_N,
                             "RecipientUserId"=>$u_id,
                             "UserLinkedBankID"=>$linked_bank,
                             "UserPayPalEmailID"=>"User PayPal Email ID",
@@ -842,9 +896,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Funds transferred</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -868,6 +926,7 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
+        global $P_A_N;
         global $wallet_id;
         global $currency_code;
         global $first_name;
@@ -884,7 +943,7 @@
             "TransferFundToDynamicAccountUser"=>[
                 "Request"=>[
                     "IssuerAccountNumber"=>$I_A_N,
-                    "FromAccountNumber"=>"SPN Issuer Account Number",
+                    "FromAccountNumber"=>$P_A_N,
                     "FromWalletID"=>$wallet_id,
                     "RecipientFirstName"=>$first_name, 
                     "RecipientLastName"=>$last_name,
@@ -921,9 +980,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User created after dynamic transfer</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -986,9 +1049,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiary exists</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1093,9 +1160,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User created</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1155,9 +1226,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User exists</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1230,6 +1305,8 @@
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User wallet created</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -1292,9 +1369,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallets</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1343,9 +1424,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Payment Methods</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -1418,9 +1503,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Transactions</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -1441,9 +1530,10 @@
         global $I_A_N;
         global $u_id;
         global $R_A_N;
+        global $wallet_currency;
         global $endpoint;
         
-        $user_wallet_currency = filter_input(INPUT_POST,'user_wallet_currency');
+        $user_wallet_currency = $wallet_currency;
         
         $curl = curl_init();
 
@@ -1453,7 +1543,7 @@
                     "IssuerAccountNumber"=>$I_A_N,
                     "UserID"=>$u_id,
                     "RemitterAccountNo"=>$R_A_N,
-                    "WalletCurrency"=>"USD",
+                    "WalletCurrency"=>$user_wallet_currency,
                     "Pagination"=>[
                         "RecordsToSkip"=>"1",
                         "RecordsToTake"=>"10"
@@ -1487,9 +1577,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Transactions By Remitter</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $transaction=>$part){
@@ -1549,9 +1643,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Transaction Details</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $fields=>$field){
@@ -1609,9 +1707,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Linked Bank Accounts</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $beneficiaries){
@@ -1632,11 +1734,10 @@
         $token = refreshAuthToken();
         
         global $I_A_N;
-        global $R_A_N;
         global $endpoint;
         global $u_id;
 
-        $bank_id = filter_input(INPUT_POST,'linked_bank');
+        $bank_id = filter_input(INPUT_POST,'bank_id');
         
         $curl = curl_init();
 
@@ -1675,9 +1776,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiary Bank Deleted</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $result=>$part){
@@ -1835,9 +1940,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User updated</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $result){
                     foreach($result as $user=>$part){
@@ -1851,7 +1960,7 @@
 
 
     //Use this function to update a beneficiary user's wallet
-    function upateUserWallet()
+    function updateUserWallet()
     {
         $token = refreshAuthToken();
         
@@ -1902,9 +2011,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Updated</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $result){
                     foreach($result as $wallet=>$part){
@@ -1963,9 +2076,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Beneficiary Wallets</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -2030,9 +2147,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>User Wallet Balance</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -2099,9 +2220,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Banks</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $results){
                     foreach($results as $banks=>$bank){
@@ -2212,9 +2337,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Bank Linked</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $result){
@@ -2287,9 +2416,13 @@
 
         $resp = json_decode($response, true);
 
+        global $go_home;
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
+            echo "<h1>Digital Gift Cards</h1>";
+            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
@@ -2301,7 +2434,12 @@
                                     //echo $items." = ".$parts."<br><br>";
                                     
                                     foreach($parts as $part=>$pieces){
-                                        echo "&emsp;".$part." = ".$pieces."<br>&emsp;&emsp;";
+                                        if($part == "Img80W"){
+                                            echo "&emsp;".$part." = <img src='".$pieces."'/><br>&emsp;&emsp;";
+                                        }
+                                        else{
+                                            echo "&emsp;".$part." = ".$pieces."<br>&emsp;&emsp;";
+                                        }
 
                                         foreach($pieces as $piece=>$item){
                                             echo $item.", ";
@@ -2316,4 +2454,97 @@
                 }
             }
         }
+    }
+
+/*****************************************************************************************************************************************************************************************************/
+
+/**
+ * Name: Andre Burte
+ * Section: Function call hanlders
+ */
+
+
+
+    $submitted = filter_input(INPUT_POST,'submit');
+
+    if($submitted == 'create_user'){
+        createUser();
+    }
+    elseif($submitted == 'create_user_wallet'){
+        createUserWallet();
+    }
+    elseif($submitted == 'get_user_wallets'){
+        getUserWallets();
+    }
+    elseif($submitted == 'get_user_wallet_balance'){
+        getUserWalletBalance();
+    }
+    elseif($submitted == 'update_user_wallet'){
+        updateUserWallet();
+    }
+    elseif($submitted == 'get_user_wallet_transactions'){
+        getUserWalletTransactions();
+    }
+    elseif($submitted == 'get_user_wallet_transactions_by_remitter'){
+        getUserWalletTransactionsByRemitter();
+    }
+    elseif($submitted == 'get_user_wallet_transaction_details'){
+        getUserWalletTransactionDetails();
+    }
+    elseif($submitted == 'update_user'){
+        updateUser();
+    }
+    elseif($submitted == 'link_beneficiary_bank'){
+        linkBankBeneficiary();
+    }
+    elseif($submitted == 'get_linked_bank_accounts'){
+        getLinkedBankAccounts();
+    }
+    elseif($submitted == 'delete_bank_beneficiary'){
+        deleteBankBeneficiary();
+    }
+    elseif($submitted == 'create_company_wallet'){
+        createCompanyWallet();
+    }
+    elseif($submitted === 'get_company_wallets'){
+        getCompanyWallets();
+    }
+    elseif($submitted == 'update_company_wallet'){
+        updateCompanyWallet();
+    }
+    elseif($submitted == 'get_company_wallet_transactions'){
+        getCompanyWalletTransactions();
+    }
+    elseif($submitted == 'get_company_wallet_transaction_details'){
+        getCompanyWalletTransactionDetails();
+    }
+    elseif($submitted == 'transfer_fund'){
+        transferFund();
+    }
+    elseif($submitted == 'transfer_dynamic_create'){
+        transferFundDynamicAccountCreateUser();
+    }
+    elseif($submitted == 'check_beneficiary_exist'){
+        checkBeneficiaryExist();
+    }
+    elseif($submitted == 'check_user_exist'){
+        checkUserExist();
+    }
+    elseif($submitted == 'get_payment_methods'){
+        getPaymentMethods();
+    }
+    elseif($submitted == "get_user_payment_methods"){
+        getUserPaymentMethods();
+    }
+    elseif($submitted == 'get_beneficiaries'){
+        getBeneficiaries();
+    }
+    elseif($submitted == 'get_digital_gift_cards'){
+        getDigitalGiftCards();
+    }
+    elseif($submitted == 'search_bank'){
+        searchBank();
+    }
+    else{
+        echo "<h2>That call is not yet setup.</h2>";
     }
