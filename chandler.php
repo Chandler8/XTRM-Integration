@@ -104,197 +104,302 @@
                 <div class="d-flex align-items-center">
 
                     <div class="d-flex align-items-center">
-                        <div class="d-flex mr-4" title="Your low balance limit is $2500.00. If your balance is red, add funds." style="cursor:help;">
+                        <div class="d-flex mr-4" title="Your minimum balance is set to $500.00. If your balance is red, add funds or change your minimum balance." style="cursor:help;">
                             <span class="input-group-addon ">Wallet Balance:</span>&nbsp;
                             <span class="input-group-addon ">$</span>
-                            <span id="balance" style="color:#489c3b;font-weight:bold;letter-spacing:0.1em;">10000.00</span>
+                            <span id="balance" style="color:#489c3b;font-weight:bold;letter-spacing:0.1em;">1000</span>
                         </div>
-                        <div class="mr-2">
-                            <span class="input-group-addon ">Transfer from bank:</span>&nbsp;
-                            <span class="input-group-addon ">$</span>
-                            <input type="text" id="amount" placeholder="0.00" class="text-right p-1" size="8">
+
+                        <span class="input-group-addon ">Funds</span>&nbsp;
+                        <span class="input-group-addon "></span>
+                        <input type="text" id="amount" placeholder="$0.00" class="text-right p-1" size="12">
+
+
+                        <div id="button">
+                            <input type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalAdd" value="Add to Wallet">
+
+                            <div class="container">
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModalAdd" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h4 class="modal-title">Add to Wallet</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- This X amount of money below will need to be a variable that grabs the amount of money the user has entered into the "Funds" field -->
+                                                <p>Are you sure you want to transfer X amount of money from bank account to your E-wallet?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-success btn-lg" onclick="changeBalance();" data-dismiss="modal">YES</button>
+                                                <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">NO</button>
+                                                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
+                        <!-- <span class="input-group-addon ">Transfer from bank:</span>&nbsp; -->
+                        <!-- <span class="input-group-addon ">$</span> -->
+                        <!-- <input type="text" id="amount" placeholder="0.00" class="text-right p-1" size="8"> -->
+                    
+
+
+                    <div id="button">
+                            <input type="submit" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModalMinus" value="Subtract from Wallet">
+
+                            <div class="container">
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModalMinus" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h4 class="modal-title">Subtract from Wallet</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- This X amount of money below will need to be a variable that grabs the amount of money the user has entered into the "Funds" field -->
+                                                <p>Are you sure you want to transfer X amount of money from your E-wallet to your bank account?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success btn-lg" onclick="changeBalance();" data-dismiss="modal">YES</button>
+                                                <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">NO</button>
+                                                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div id="button">
+                            <input type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalPay" value="Pay Talent">
+
+                            <div class="container">
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModalPay" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h4 class="modal-title">Pay Talent</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to pay the selected talent?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success btn-lg" onclick="changeBalance();" data-dismiss="modal">YES</button>
+                                                <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">NO</button>
+                                                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    <!-- 
                         <div class="select_wrap mr-2">
                             <select class="form-control form_additional_options" name="wallet_options" id="wallet_options" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">
                                 <option value="add" selected="">Add funds to this wallet</option>
                                 <option value="transfer">Transfer funds to bank</option>
                             </select>
-                        </div>
-                        <div id="button">
+                        </div> -->
+
+
+                    <!-- <div id="button">
                             <input type="submit" value="Submit" size="7" onclick="changeBalance();">
+                        </div> -->
+                </div>
+
+                <div class="select_wrap mr-3">
+                    <select class="form-control form_additional_options" name="records_per_page" id="records_per_page" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">
+                        <option value="10" selected="">10 entries</option>
+                        <option value="25">25 entries</option>
+                        <option value="50">50 entries</option>
+                        <option value="100">100 entries</option>
+                    </select>
+                </div>
+
+                <div id="paginationcontainer_TalentBill_searchpage">
+                    <div class="pagination form-control mr-6">
+                        <ul class="d-flex">
+
+                            <li>
+                                <input class="form_additional_options current_page" name="current_page" data-sort="TalentBill.date_created" data-sortdir="DESC" id="current_page_TalentBill_searchpage" data-parent="" data-parentid="" type="text" value="1" data-module="TalentBill" data-mode="searchpage">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <input type="hidden" id="viewmode_container_TalentBill_searchpage" value="" autocomplete="off">
+
+            </div>
+        </div>
+
+        <div class="listing_view d-flex">
+            <div class="advanced_search bg_gray" id="advanced_search_TalentBill_searchpage">
+                <div class="p-3">
+                    <input type="hidden" id="select_type_TalentBill_searchpage" value="" autocomplete="off">
+                    <form action="" method="get" class="searchform ng-pristine ng-valid" name="SearchForm" id="SearchForm_TalentBill_searchpage" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">
+                        <div class="form-group">
+
+
+                            <div class="listing_warp w-100" id="searchcontainer_TalentBill_searchpage">
+                                <input type="hidden" id="searchcontainer_TalentBill_searchpage-total_count" value="3" autocomplete="off">
+
+                                <table class="table table-bordered listing_table th_bg col_custom_width first_col_center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <div class="d-flex align-items-center dropdown action_dropdown">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input crmcheckboxaction_head" id="searchcontainer_TalentBill_searchpage-checkbox-head" data-container="searchcontainer_TalentBill_searchpage">
+                                                        <label class="custom-control-label" for="searchcontainer_TalentBill_searchpage-checkbox-head"></label>
+                                                    </div>
+
+                                                    <i class="fal fa-angle-down font_20 cursor_pointer" data-toggle="dropdown" aria-expanded="false"></i>
+                                                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(24px, 22px, 0px);">
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="MassCreate" data-key="AddNote" data-module="TalentBill" data-parent="" data-parentid="">Add Note</a>
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="MassCreate" data-key="AddTask" data-module="TalentBill" data-parent="" data-parentid="">Add Task</a>
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Archive" data-key="Archive" data-module="TalentBill" data-parent="" data-parentid="">Archive</a>
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Delete" data-key="Delete" data-module="TalentBill" data-parent="" data-parentid="">Delete</a>
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Export" data-key="Export" data-module="TalentBill" data-parent="" data-parentid="">Export</a>
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Lock" data-key="Lock" data-module="TalentBill" data-parent="" data-parentid="">Lock</a>
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Pay" data-key="Pay" data-module="TalentBill" data-parent="" data-parentid="">Pay</a>
+                                                        <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Unlock" data-key="Unlock" data-module="TalentBill" data-parent="" data-parentid="">Unlock</a>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th scope="col">Edit</th>
+                                            <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.data_work_talents_id" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Talent Name</a>
+
+                                            </th>
+                                            <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.name" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Name</a>
+
+                                            </th>
+                                            <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.parent_id" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Related To</a>
+
+                                            </th>
+                                            <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.locked" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Locked</a>
+
+                                            </th>
+                                            <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.amount" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Amount</a>
+
+                                            </th>
+                                            <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.due_date" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Due Date</a>
+
+                                            </th>
+                                            <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.date_created" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Date Created</a>
+                                                <span class="up_down"><i class="far fa-sort-down"></i></span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input crmcheckboxaction searchcontainer_TalentBill_searchpage-searchresult-checkbox" data-container="searchcontainer_TalentBill_searchpage-searchresult-checkbox" id="checkbox-TalentBill_searchpage_982914B4-9FDA-4C74-BC1B-AACB2E200682">
+                                                    <label class="custom-control-label" for="checkbox-TalentBill_searchpage_982914B4-9FDA-4C74-BC1B-AACB2E200682"></label>
+                                                </div>
+                                            </td>
+                                            <td><a name="quickedit" data-module="TalentBill" class="fas fa-pen-square mr-2 crmcreatebutton" data-createtype="quickedit" data-toggle="modal" data-target="#createrecord" data-parent="" data-parentid="" data-record="982914B4-9FDA-4C74-BC1B-AACB2E200682" data-searchid="222197_1621951483.7837" data-usermode="tenant"></a></td>
+                                            <td><a href="https://demo.v2.senegalsoftware.com/Talents/detail?id=280D9D3C-C75F-4412-B2D5-EADDD1AF688D">Chandler Testing</a></td>
+                                            <td><a style="color: inherit;" href="https://demo.v2.senegalsoftware.com/TalentBill/detail?id=1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"><b>Alpha Promo Event - 04/12/21</b></a></td>
+                                            <td>Shifts: <a href="https://demo.v2.senegalsoftware.com/Shifts/detail?id=3F6A10CD-14C1-439C-8AC9-030E1D22DD4B">Alpha Promo Event - 04/12/21</a></td>
+                                            <td>Yes</td>
+                                            <td>$0.00</td>
+                                            <td>04/14/2021</td>
+                                            <td>05/04/2021 01:24 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input crmcheckboxaction searchcontainer_TalentBill_searchpage-searchresult-checkbox" data-container="searchcontainer_TalentBill_searchpage-searchresult-checkbox" id="checkbox-TalentBill_searchpage_64B5563D-E3F7-4A1B-970A-4117BF4F3E5A">
+                                                    <label class="custom-control-label" for="checkbox-TalentBill_searchpage_64B5563D-E3F7-4A1B-970A-4117BF4F3E5A"></label>
+                                                </div>
+                                            </td>
+                                            <td><a name="quickedit" data-module="TalentBill" class="fas fa-pen-square mr-2 crmcreatebutton" data-createtype="quickedit" data-toggle="modal" data-target="#createrecord" data-parent="" data-parentid="" data-record="64B5563D-E3F7-4A1B-970A-4117BF4F3E5A" data-searchid="222197_1621951483.7837" data-usermode="tenant"></a></td>
+                                            <td><a href="https://demo.v2.senegalsoftware.com/Talents/detail?id=280D9D3C-C75F-4412-B2D5-EADDD1AF688D">Chandler Testing</a></td>
+                                            <td><a style="color: inherit;" href="https://demo.v2.senegalsoftware.com/TalentBill/detail?id=1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"><b>Alpha Promo Event - 04/12/21</b></a></td>
+                                            <td>Shifts: <a href="https://demo.v2.senegalsoftware.com/Shifts/detail?id=3F6A10CD-14C1-439C-8AC9-030E1D22DD4B">Alpha Promo Event - 04/12/21</a></td>
+                                            <td>Yes</td>
+                                            <td>$0.00</td>
+                                            <td>01/04/0000</td>
+                                            <td>05/04/2021 01:22 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input crmcheckboxaction searchcontainer_TalentBill_searchpage-searchresult-checkbox" data-container="searchcontainer_TalentBill_searchpage-searchresult-checkbox" id="checkbox-TalentBill_searchpage_1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683">
+                                                    <label class="custom-control-label" for="checkbox-TalentBill_searchpage_1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"></label>
+                                                </div>
+                                            </td>
+                                            <td><a name="quickedit" data-module="TalentBill" class="fas fa-pen-square mr-2 crmcreatebutton" data-createtype="quickedit" data-toggle="modal" data-target="#createrecord" data-parent="" data-parentid="" data-record="1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683" data-searchid="222197_1621951483.7837" data-usermode="tenant"></a></td>
+                                            <td><a href="https://demo.v2.senegalsoftware.com/Talents/detail?id=280D9D3C-C75F-4412-B2D5-EADDD1AF688D">Chandler Testing</a></td>
+                                            <td><a style="color: inherit;" href="https://demo.v2.senegalsoftware.com/TalentBill/detail?id=1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"><b>Alpha Promo Event - 04/12/21</b></a></td>
+                                            <td>Shifts: <a href="https://demo.v2.senegalsoftware.com/Shifts/detail?id=3F6A10CD-14C1-439C-8AC9-030E1D22DD4B">Alpha Promo Event - 04/12/21</a></td>
+                                            <td>Yes</td>
+                                            <td>$0.00</td>
+                                            <td>06/09/2021</td>
+                                            <td>04/20/2021 08:50 AM</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div id="modal-popup" tabindex="-1" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="modal fade" role="dialog" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 id="modal-heading" class="modal-title color_green"></h5>
+                            <button class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
+                        </div>
+                        <div id="modal-body" class="modal-body">
+
                         </div>
                     </div>
-
-                    <div class="select_wrap mr-3">
-                        <select class="form-control form_additional_options" name="records_per_page" id="records_per_page" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">
-                            <option value="10" selected="">10 entries</option>
-                            <option value="25">25 entries</option>
-                            <option value="50">50 entries</option>
-                            <option value="100">100 entries</option>
-                        </select>
-                    </div>
-
-                    <div id="paginationcontainer_TalentBill_searchpage">
-                        <div class="pagination form-control mr-6">
-                            <ul class="d-flex">
-
-                                <li>
-                                    <input class="form_additional_options current_page" name="current_page" data-sort="TalentBill.date_created" data-sortdir="DESC" id="current_page_TalentBill_searchpage" data-parent="" data-parentid="" type="text" value="1" data-module="TalentBill" data-mode="searchpage">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <input type="hidden" id="viewmode_container_TalentBill_searchpage" value="" autocomplete="off">
-
                 </div>
             </div>
 
-            <div class="listing_view d-flex">
-                <div class="advanced_search bg_gray" id="advanced_search_TalentBill_searchpage">
-                    <div class="p-3">
-                        <input type="hidden" id="select_type_TalentBill_searchpage" value="" autocomplete="off">
-                        <form action="" method="get" class="searchform ng-pristine ng-valid" name="SearchForm" id="SearchForm_TalentBill_searchpage" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">
-                            <div class="form-group">
 
+            <div class="modal" id="LargeImageModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
 
-                                <div class="listing_warp w-100" id="searchcontainer_TalentBill_searchpage">
-                                    <input type="hidden" id="searchcontainer_TalentBill_searchpage-total_count" value="3" autocomplete="off">
-
-                                    <table class="table table-bordered listing_table th_bg col_custom_width first_col_center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">
-                                                    <div class="d-flex align-items-center dropdown action_dropdown">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input crmcheckboxaction_head" id="searchcontainer_TalentBill_searchpage-checkbox-head" data-container="searchcontainer_TalentBill_searchpage">
-                                                            <label class="custom-control-label" for="searchcontainer_TalentBill_searchpage-checkbox-head"></label>
-                                                        </div>
-
-                                                        <i class="fal fa-angle-down font_20 cursor_pointer" data-toggle="dropdown" aria-expanded="false"></i>
-                                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(24px, 22px, 0px);">
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="MassCreate" data-key="AddNote" data-module="TalentBill" data-parent="" data-parentid="">Add Note</a>
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="MassCreate" data-key="AddTask" data-module="TalentBill" data-parent="" data-parentid="">Add Task</a>
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Archive" data-key="Archive" data-module="TalentBill" data-parent="" data-parentid="">Archive</a>
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Delete" data-key="Delete" data-module="TalentBill" data-parent="" data-parentid="">Delete</a>
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Export" data-key="Export" data-module="TalentBill" data-parent="" data-parentid="">Export</a>
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Lock" data-key="Lock" data-module="TalentBill" data-parent="" data-parentid="">Lock</a>
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Pay" data-key="Pay" data-module="TalentBill" data-parent="" data-parentid="">Pay</a>
-                                                            <a class="dropdown-item crmmultiactionbutton" data-container="searchcontainer_TalentBill_searchpage" data-action="Unlock" data-key="Unlock" data-module="TalentBill" data-parent="" data-parentid="">Unlock</a>
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th scope="col">Edit</th>
-                                                <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.data_work_talents_id" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Talent Name</a>
-
-                                                </th>
-                                                <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.name" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Name</a>
-
-                                                </th>
-                                                <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.parent_id" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Related To</a>
-
-                                                </th>
-                                                <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.locked" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Locked</a>
-
-                                                </th>
-                                                <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.amount" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Amount</a>
-
-                                                </th>
-                                                <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.due_date" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Due Date</a>
-
-                                                </th>
-                                                <th scope="col"><a class="sortresults" href="#" data-sort="TalentBill.date_created" data-sortdir="asc" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">Date Created</a>
-                                                    <span class="up_down"><i class="far fa-sort-down"></i></span>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input crmcheckboxaction searchcontainer_TalentBill_searchpage-searchresult-checkbox" data-container="searchcontainer_TalentBill_searchpage-searchresult-checkbox" id="checkbox-TalentBill_searchpage_982914B4-9FDA-4C74-BC1B-AACB2E200682">
-                                                        <label class="custom-control-label" for="checkbox-TalentBill_searchpage_982914B4-9FDA-4C74-BC1B-AACB2E200682"></label>
-                                                    </div>
-                                                </td>
-                                                <td><a name="quickedit" data-module="TalentBill" class="fas fa-pen-square mr-2 crmcreatebutton" data-createtype="quickedit" data-toggle="modal" data-target="#createrecord" data-parent="" data-parentid="" data-record="982914B4-9FDA-4C74-BC1B-AACB2E200682" data-searchid="222197_1621951483.7837" data-usermode="tenant"></a></td>
-                                                <td><a href="https://demo.v2.senegalsoftware.com/Talents/detail?id=280D9D3C-C75F-4412-B2D5-EADDD1AF688D">Chandler Testing</a></td>
-                                                <td><a style="color: inherit;" href="https://demo.v2.senegalsoftware.com/TalentBill/detail?id=1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"><b>Alpha Promo Event - 04/12/21</b></a></td>
-                                                <td>Shifts: <a href="https://demo.v2.senegalsoftware.com/Shifts/detail?id=3F6A10CD-14C1-439C-8AC9-030E1D22DD4B">Alpha Promo Event - 04/12/21</a></td>
-                                                <td>Yes</td>
-                                                <td>$0.00</td>
-                                                <td>04/14/2021</td>
-                                                <td>05/04/2021 01:24 PM</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input crmcheckboxaction searchcontainer_TalentBill_searchpage-searchresult-checkbox" data-container="searchcontainer_TalentBill_searchpage-searchresult-checkbox" id="checkbox-TalentBill_searchpage_64B5563D-E3F7-4A1B-970A-4117BF4F3E5A">
-                                                        <label class="custom-control-label" for="checkbox-TalentBill_searchpage_64B5563D-E3F7-4A1B-970A-4117BF4F3E5A"></label>
-                                                    </div>
-                                                </td>
-                                                <td><a name="quickedit" data-module="TalentBill" class="fas fa-pen-square mr-2 crmcreatebutton" data-createtype="quickedit" data-toggle="modal" data-target="#createrecord" data-parent="" data-parentid="" data-record="64B5563D-E3F7-4A1B-970A-4117BF4F3E5A" data-searchid="222197_1621951483.7837" data-usermode="tenant"></a></td>
-                                                <td><a href="https://demo.v2.senegalsoftware.com/Talents/detail?id=280D9D3C-C75F-4412-B2D5-EADDD1AF688D">Chandler Testing</a></td>
-                                                <td><a style="color: inherit;" href="https://demo.v2.senegalsoftware.com/TalentBill/detail?id=1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"><b>Alpha Promo Event - 04/12/21</b></a></td>
-                                                <td>Shifts: <a href="https://demo.v2.senegalsoftware.com/Shifts/detail?id=3F6A10CD-14C1-439C-8AC9-030E1D22DD4B">Alpha Promo Event - 04/12/21</a></td>
-                                                <td>Yes</td>
-                                                <td>$0.00</td>
-                                                <td>01/04/0000</td>
-                                                <td>05/04/2021 01:22 PM</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input crmcheckboxaction searchcontainer_TalentBill_searchpage-searchresult-checkbox" data-container="searchcontainer_TalentBill_searchpage-searchresult-checkbox" id="checkbox-TalentBill_searchpage_1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683">
-                                                        <label class="custom-control-label" for="checkbox-TalentBill_searchpage_1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"></label>
-                                                    </div>
-                                                </td>
-                                                <td><a name="quickedit" data-module="TalentBill" class="fas fa-pen-square mr-2 crmcreatebutton" data-createtype="quickedit" data-toggle="modal" data-target="#createrecord" data-parent="" data-parentid="" data-record="1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683" data-searchid="222197_1621951483.7837" data-usermode="tenant"></a></td>
-                                                <td><a href="https://demo.v2.senegalsoftware.com/Talents/detail?id=280D9D3C-C75F-4412-B2D5-EADDD1AF688D">Chandler Testing</a></td>
-                                                <td><a style="color: inherit;" href="https://demo.v2.senegalsoftware.com/TalentBill/detail?id=1EDE3E3F-61A5-4ABE-B6D2-AD7D236AA683"><b>Alpha Promo Event - 04/12/21</b></a></td>
-                                                <td>Shifts: <a href="https://demo.v2.senegalsoftware.com/Shifts/detail?id=3F6A10CD-14C1-439C-8AC9-030E1D22DD4B">Alpha Promo Event - 04/12/21</a></td>
-                                                <td>Yes</td>
-                                                <td>$0.00</td>
-                                                <td>06/09/2021</td>
-                                                <td>04/20/2021 08:50 AM</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                <div id="modal-popup" tabindex="-1" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="modal fade" role="dialog" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 id="modal-heading" class="modal-title color_green"></h5>
-                                <button class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
-                            </div>
-                            <div id="modal-body" class="modal-body">
-
-                            </div>
+                        <!-- Modal body -->
+                        <div class="modal-body text-center">
+                            <button class="close mb-3" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
+                            <img id="bigimageid" src="%LargeImageSource%">
+                            <h3 class="my-3" id="phototitle">%PhotoCategory%</h3>
+                            <p class="my-3 color_gray" id="photodescription">%PhotoDescription%</p>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="modal" id="LargeImageModal">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-
-                            <!-- Modal body -->
-                            <div class="modal-body text-center">
-                                <button class="close mb-3" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
-                                <img id="bigimageid" src="%LargeImageSource%">
-                                <h3 class="my-3" id="phototitle">%PhotoCategory%</h3>
-                                <p class="my-3 color_gray" id="photodescription">%PhotoDescription%</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
 </section>
 
@@ -305,48 +410,54 @@
         <p>Click here on this<a href="https://www.xtrm.com/web/Register/SponSimpleSignup.aspx" target="_blank"> link</a> to begin your XTRM setup.</p>
     </div>
 
-<br>
+    <br>
 
-<br>
+    <br>
 
 
-        <p>To set up your merchant services account with XTRM, please go to the following
-            <a href="andre.php">PAGE</a> </p>
+    <p>To set up your merchant services account with XTRM, please go to the following
+        <a href="andre.php">PAGE</a>
+    </p>
 
-            <br>
+    <br>
 
-        <form action="{{ route('save-form-data') }}" method="POST" id="settingsForm" class="form-validate">
-        
-            <div class="setting_wrap_scroll">
-                <input type="hidden" name="section_name" value="FinanceSettings">
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" class="form-control" placeholder="Email Address" name="KyckGlobal:email_address[value]" title="Email Address" data-type="crmfield" required>
-                    <!-- value="{{isset($pageData['fieldsData']['email_address']) ? $pageData['fieldsData']['email_address'] : ''}}" Needs to get input in the field above, after name and before title -->
+    <form action="{{ route('save-form-data') }}" method="POST" id="settingsForm" class="form-validate">
 
-                    <input type="hidden" name="KyckGlobal:email_address[label]" value="Email Address">
-                    <input type="hidden" name="KyckGlobal:email_address[type]" value="text">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" class="form-control" placeholder="Password" name="KyckGlobal:password[value]" title="Password" data-type="crmfield" required>
-                    <!-- value="{{isset($pageData['fieldsData']['password']) ? $pageData['fieldsData']['password'] : ''}}" Needs to get input in the field above, after name and before title -->
+        <div class="setting_wrap_scroll">
+            <input type="hidden" name="section_name" value="FinanceSettings">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" class="form-control" placeholder="Email Address" name="KyckGlobal:email_address[value]" title="Email Address" data-type="crmfield" required>
+                <!-- value="{{isset($pageData['fieldsData']['email_address']) ? $pageData['fieldsData']['email_address'] : ''}}" Needs to get input in the field above, after name and before title -->
 
-                    <input type="hidden" name="KyckGlobal:password[label]" value="Password">
-                    <input type="hidden" name="KyckGlobal:password[type]" value="text">
-                </div>
+                <input type="hidden" name="KyckGlobal:email_address[label]" value="Email Address">
+                <input type="hidden" name="KyckGlobal:email_address[type]" value="text">
             </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="text" class="form-control" placeholder="Password" name="KyckGlobal:password[value]" title="Password" data-type="crmfield" required>
+                <!-- value="{{isset($pageData['fieldsData']['password']) ? $pageData['fieldsData']['password'] : ''}}" Needs to get input in the field above, after name and before title -->
 
-            <button class="btn mt-2" id="settingsBtn">Save</button>
+                <input type="hidden" name="KyckGlobal:password[label]" value="Password">
+                <input type="hidden" name="KyckGlobal:password[type]" value="text">
+            </div>
+        </div>
 
-        </form>
+        <button class="btn mt-2" id="settingsBtn">Save</button>
+
+    </form>
 
     </div>
 
 </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="submit.php" crossorigin="anonymous"></script>
-    <script src="scripts/chan_script.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="submit.php" crossorigin="anonymous"></script>
+<script src="scripts/chan_script.js"></script>
+
 </html>
