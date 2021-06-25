@@ -1,8 +1,11 @@
+/*
 var counter_list = [10,10000,10000];
 var str_counter_0 = counter_list[0];
 var str_counter_1 = counter_list[1];
 var str_counter_2 = counter_list[2];
 var display_str = "";
+*/
+
 var amount = document.getElementById("amount");
 var display_div = document.getElementById("balance");
 var display_num = parseInt(display_div.innerHTML);
@@ -35,8 +38,14 @@ function incrementCount(current_count){
 }
 */
 
-function changeBalance(){
-    let total = display_num - amount.value;
+function addToBalance(){
+    let total = +(display_num) + parseFloat(amount.value);
+    console.log(total);
+    display_div.innerHTML = total;
+}
+
+function subtractFromBalance(){
+    let total = +(display_num) - amount.value;
     console.log(total);
     display_div.innerHTML = total;
 }

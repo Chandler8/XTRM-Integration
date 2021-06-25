@@ -1,3 +1,17 @@
+<?php
+    include "scripts/XTRM.php";
+/*
+    function showWalletBalance(){
+        $company_wallets = getCompanyWallets();
+        
+        foreach($company_wallets as $company_wallet){
+            if($company_wallet->WalletID == 108754){
+                echo $company_wallet->WalletBalance;
+            }
+        }
+    }
+    */
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,7 +121,7 @@
                         <div class="d-flex mr-4" title="Your minimum balance is set to $500.00. If your balance is red, add funds or change your minimum balance." style="cursor:help;">
                             <span class="input-group-addon ">Wallet Balance:</span>&nbsp;
                             <span class="input-group-addon ">$</span>
-                            <span id="balance" style="color:#489c3b;font-weight:bold;letter-spacing:0.1em;">1000</span>
+                            <span id="balance" style="color:#489c3b;font-weight:bold;letter-spacing:0.1em;"><?= showWalletBalance(); ?></span>
                         </div>
 
                         <span class="input-group-addon ">Funds</span>&nbsp;
@@ -115,8 +129,8 @@
                         <input type="text" id="amount" placeholder="$0.00" class="text-right p-1" size="12">
 
 
-                        <div id="button" class="col">
-                            <input type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalAdd" value="Add to Wallet">
+                        <div id="add_to_wallet_btn" class="col">
+                            <input type="submit" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModalAdd" value="Add to Wallet">
 
                             <div class="container">
                                 <!-- Modal -->
@@ -134,7 +148,7 @@
                                                 <p>Are you sure you want to transfer X amount of money from bank account to your E-wallet?</p>
                                             </div>
                                             <div class="modal-footer">
-                                            <button type="button" class="btn btn-success btn-lg" onclick="changeBalance();" data-dismiss="modal">YES</button>
+                                                <button type="button" id="accept_add_to_wallet" class="btn btn-success btn-lg" onclick="addToBalance();" data-dismiss="modal">YES</button>
                                                 <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">NO</button>
                                                 <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                                             </div>
@@ -152,8 +166,8 @@
                     
 
 
-                    <div id="button" class="col">
-                            <input type="submit" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModalMinus" value="Subtract from Wallet">
+                    <div id="subtract_from_wallet_btn" class="col">
+                            <input type="submit" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModalMinus" value="Subtract from Wallet">
 
                             <div class="container">
                                 <!-- Modal -->
@@ -171,7 +185,7 @@
                                                 <p>Are you sure you want to transfer X amount of money from your E-wallet to your bank account?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success btn-lg" onclick="changeBalance();" data-dismiss="modal">YES</button>
+                                                <button type="button" id="accept_subtract_from_wallet" class="btn btn-success btn-lg" onclick="subtractFromBalance();" data-dismiss="modal">YES</button>
                                                 <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">NO</button>
                                                 <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                                             </div>
@@ -184,8 +198,8 @@
 
                         </div>
 
-                        <div id="button">
-                            <input type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalPay" value="Pay Talent">
+                        <div id="pay_talent_btn" class="col">
+                            <input type="submit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModalPay" value="Pay Talent">
 
                             <div class="container">
                                 <!-- Modal -->
@@ -202,7 +216,7 @@
                                                 <p>Are you sure you want to pay the selected talent?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success btn-lg" onclick="changeBalance();" data-dismiss="modal">YES</button>
+                                                <button type="button" id="accept_pay_talent" class="btn btn-success btn-lg" onclick="subtractFromBalance();" data-dismiss="modal">YES</button>
                                                 <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">NO</button>
                                                 <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                                             </div>
