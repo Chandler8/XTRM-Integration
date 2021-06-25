@@ -115,7 +115,7 @@
                         <input type="text" id="amount" placeholder="$0.00" class="text-right p-1" size="12">
 
 
-                        <div id="button">
+                        <div id="button" class="col">
                             <input type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalAdd" value="Add to Wallet">
 
                             <div class="container">
@@ -152,7 +152,7 @@
                     
 
 
-                    <div id="button">
+                    <div id="button" class="col">
                             <input type="submit" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModalMinus" value="Subtract from Wallet">
 
                             <div class="container">
@@ -230,7 +230,7 @@
                         </div> -->
                 </div>
 
-                <div class="select_wrap mr-3">
+                <div class="col select_wrap mr-3">
                     <select class="form-control form_additional_options" name="records_per_page" id="records_per_page" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">
                         <option value="10" selected="">10 entries</option>
                         <option value="25">25 entries</option>
