@@ -4,7 +4,8 @@ var str_counter_1 = counter_list[1];
 var str_counter_2 = counter_list[2];
 var display_str = "";
 var amount = document.getElementById("amount");
-var display_div = document.getElementById("balance").innerHTML;
+var display_div = document.getElementById("balance");
+var display_num = parseInt(display_div.innerHTML);
 
 //display_div.innerHTML = counter_list[1];
 
@@ -35,9 +36,7 @@ function incrementCount(current_count){
 */
 
 function changeBalance(){
-    display_div = parseInt(display_div);
-
-    let total = display_div - amount.value;
+    let total = display_num - amount.value;
     console.log(total);
     display_div.innerHTML = total;
 }
