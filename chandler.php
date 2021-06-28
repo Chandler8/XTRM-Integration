@@ -1,16 +1,18 @@
 <?php
     include "scripts/XTRM.php";
-/*
+
     function showWalletBalance(){
         $company_wallets = getCompanyWallets();
+        $balance = 0;
         
         foreach($company_wallets as $company_wallet){
-            if($company_wallet->WalletID == 108754){
-                echo $company_wallet->WalletBalance;
+            //echo $company_wallet['WalletBalance'];
+            if($company_wallet['WalletID'] == 112868){
+                $balance = $company_wallet['WalletBalance'];
             }
         }
+        echo number_format($balance,2,'.','');
     }
-    */
 ?>
 <!DOCTYPE html>
 <html lang="en">

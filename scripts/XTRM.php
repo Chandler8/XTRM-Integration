@@ -287,25 +287,31 @@
 
         global $go_home;
 
+        $call_result = [];
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            echo "<h1>Company Wallets</h1>";
-            echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
+            //echo "<h1>Company Wallets</h1>";
+            //echo "<p><a href='".$go_home."'>Return to API calls test page</a></p>";
             foreach($resp as $resps){
                 foreach($resps as $resp){
                     foreach($resp as $results){
                         foreach($results as $wallets){
                             foreach($wallets as $walletDetails){
+                                 array_push($call_result,$walletDetails);
+                                /*
                                 foreach($walletDetails as $detail=>$part){
                                     echo $detail." = ".$part."<br>";
                                 }
                                 echo "<br>";
+                                */
                             }
                         }
                     }
                 }
             }
+            return $call_result;
         }
     }
 

@@ -8,7 +8,7 @@ var display_str = "";
 
 var amount = document.getElementById("amount");
 var display_div = document.getElementById("balance");
-var display_num = parseInt(display_div.innerHTML);
+var display_num = parseFloat(display_div.innerHTML);
 
 //display_div.innerHTML = counter_list[1];
 
@@ -37,16 +37,19 @@ function incrementCount(current_count){
 
 }
 */
+console.log(display_num);
 
 function addToBalance(){
-    let total = +(display_num) + parseFloat(amount.value);
-    console.log(total);
+    let amount1 = parseFloat(amount.value);
+    let total = +(display_num) + amount1;
+    console.log("Entered num:" + amount1 + " Total:" + total);
     display_div.innerHTML = total;
 }
 
 function subtractFromBalance(){
-    let total = +(display_num) - amount.value;
-    console.log(total);
+    let amount1 = parseFloat(amount.value);
+    let total = +(display_num) - amount1;
+    console.log(amount1 + " " + total);
     display_div.innerHTML = total;
 }
 
