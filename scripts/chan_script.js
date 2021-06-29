@@ -40,17 +40,19 @@ function incrementCount(current_count){
 console.log(display_num);
 
 function addToBalance(){
+    let display_num = parseFloat(display_div.innerHTML);
     let amount1 = parseFloat(amount.value);
     let total = +(display_num) + amount1;
     console.log("Entered num:" + amount1 + " Total:" + total);
-    display_div.innerHTML = total;
+    display_div.innerHTML = total.toFixed(2);
 }
 
 function subtractFromBalance(){
+    let display_num = parseFloat(display_div.innerHTML);
     let amount1 = parseFloat(amount.value);
     let total = +(display_num) - amount1;
     console.log(amount1 + " " + total);
-    display_div.innerHTML = total;
+    display_div.innerHTML = total.toFixed(2);
 }
 
 //changeBalance();

@@ -246,7 +246,7 @@
                         </div> -->
                 </div>
 
-                <div class="col select_wrap mr-3">
+                <div class="col-2 select_wrap mr-2">
                     <select class="form-control form_additional_options" name="records_per_page" id="records_per_page" data-parent="" data-parentid="" data-module="TalentBill" data-mode="searchpage">
                         <option value="10" selected="">10 entries</option>
                         <option value="25">25 entries</option>
@@ -255,12 +255,12 @@
                     </select>
                 </div>
 
-                <div id="paginationcontainer_TalentBill_searchpage">
-                    <div class="pagination form-control mr-6">
+                <div id="paginationcontainer_TalentBill_searchpage" class="col">
+                    <div class="pagination form-control p-1">
                         <ul class="d-flex">
 
                             <li>
-                                <input class="form_additional_options current_page" name="current_page" data-sort="TalentBill.date_created" data-sortdir="DESC" id="current_page_TalentBill_searchpage" data-parent="" data-parentid="" type="text" value="1" data-module="TalentBill" data-mode="searchpage">
+                                <input class="form_additional_options current_page" name="current_page" data-sort="TalentBill.date_created" data-sortdir="DESC" id="current_page_TalentBill_searchpage" data-parent="" data-parentid="" type="text" value="1" data-module="TalentBill" data-mode="searchpage" size=2>
                             </li>
                         </ul>
                     </div>
