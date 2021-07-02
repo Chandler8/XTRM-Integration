@@ -299,15 +299,17 @@
                     foreach($resp as $results){
                         foreach($results as $wallets){
                             foreach($wallets as $walletDetails){
-                                foreach($walletDetails as $detail=>$part){
+                                /*foreach($walletDetails as $detail=>$part){
                                     echo $detail." = ".$part."<br>";
                                 }
-                                echo "<br>";
+                                echo "<br>";*/
+                                array_push($call_result, $walletDetails);
                             }
                         }
                     }
                 }
             }
+            return $call_result;
         }
     }
 
