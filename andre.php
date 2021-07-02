@@ -176,10 +176,7 @@
                         </div>
                         <div class="form-group user-group find-user col-2">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -213,10 +210,7 @@
                         </div>
                         <div class="form-group user-group find-user col-4">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -260,10 +254,7 @@
                         </div>
                         <div class="form-group user-group find-user col-4">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -290,10 +281,7 @@
                     <div class="form-row">
                         <div class="form-group user-group find-user col-6">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -471,8 +459,8 @@
                             <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Name already provided" disabled>
                         </div>
                         <div class="form-group user-group find-bank col-6">
-                            <label for="country_code">Country</label>
-                            <input type="text" class="form-control" id="country_code" name="country_code" placeholder="Enter the country of the bank to search">
+                            <label for="country_code">Select the bank's country</label>
+                            <select class="custom-select country_code_type" name="wallet_currency"></select>
                         </div>
                         <div class="form-group user-group find-bank col-6">
                             <label for="bank_name">Bank account number</label>
@@ -497,10 +485,7 @@
                         </div>
                         <div class="form-group user-group find-user col-4">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -562,10 +547,7 @@
                         </div>
                         <div class="form-group user-group find-user col-2">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -593,10 +575,7 @@
                         </div>
                         <div class="form-group user-group find-user col-2">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -676,10 +655,7 @@
                         </div>
                         <div class="form-group user-group find-user col-2">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -734,10 +710,7 @@
                         </div>
                         <div class="form-group user-group find-user col-2">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                         <div class="form-group user-group col-8">
                             <label for="description">Description</label>
@@ -813,10 +786,7 @@
                     <div class="form-row">
                         <div class="form-group user-group find-user col-2">
                             <label for="currency_type">Select currency type</label>
-                            <select class="custom-select" name="wallet_currency" id="currency_type">
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select class="custom-select currency_type" name="wallet_currency"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -833,8 +803,8 @@
                             <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Name already provided" disabled>
                         </div>
                         <div class="form-group user-group find-bank col-2">
-                            <label for="country_code">Country (ISO2)</label>
-                            <input type="text" class="form-control" id="country_code" name="country_code" placeholder="Bank's country code">
+                            <label for="country_code">Select the bank's country</label>
+                            <select class="custom-select country_code_type" name="country_code"></select>
                         </div>
                     </div>
                     <div class="form-row">
