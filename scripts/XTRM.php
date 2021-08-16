@@ -2509,6 +2509,9 @@
     elseif($submitted === 'get_company_wallets'){
         getCompanyWallets();
     }
+    elseif($submitted == 'fund_wallet_using_ACH_debit'){
+        fundWalletUsingACHDebit();
+    }
     elseif($submitted == 'update_company_wallet'){
         updateCompanyWallet();
     }
